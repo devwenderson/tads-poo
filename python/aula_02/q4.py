@@ -1,9 +1,5 @@
 data = input("Digite uma da no formato dd/mm/aaaa: ")
-data_in_list = data.split("/")
-
-dia = int(data_in_list[0])
-mes = int(data_in_list[1])
-ano = int(data_in_list[2])
+dia, mes, ano = map(int, data.split("/"))
 mensagem = "Data válida"
 
 meses_com_31 = [1, 3, 5, 7, 8, 10, 12]
