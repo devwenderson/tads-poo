@@ -11,9 +11,9 @@ class Ingresso {
         hora = hora_arg;
     }
 
-    short calcula_ingresso() {
+    int calcula_ingresso() {
         if (dia == "seg" || dia == "ter" || dia == "qui") {
-            short valor = 16;
+            int valor = 16;
             if (hora == 0 || hora >= 17) {
                 valor = valor * 1.5;
             }
@@ -21,11 +21,11 @@ class Ingresso {
             return valor;
         } 
         else if (dia == "qua") {
-            short valor = 8;
+            int valor = 8;
             return valor;
         }
         else if (dia == "sex" || dia == "sab" || dia == "dom") {
-            short valor = 20;
+            int valor = 20;
             if (hora == 0 || hora >= 17) {
                 valor = valor * 1.5;
             }
@@ -69,7 +69,17 @@ class UI {
     }
 
     void ingresso() {
-        cout << "Ingresso" << endl;
+        string dia;
+        short hora;
+        int inteira;
+        cout << "Informe o dia: ";
+        cin >> dia;
+        cout << "Informe a hora: ";
+        cin >> hora;
+        Ingresso ingr(dia, hora);
+        
+        inteira = ingr.inteira();
+        cout << "Preço da inteira: R$" << inteira << endl;
     }
 };
 
