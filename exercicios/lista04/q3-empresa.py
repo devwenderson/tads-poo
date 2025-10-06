@@ -9,6 +9,18 @@ class Cliente:
         self.setNome(nome)
         self.setCpf(cpf)
         self.setLimite(limite)
+    
+    def __str__(self):
+        if (self.__socio == None):
+            msg = f"Nome: {self.getNome()}\n"
+            msg += f"Limite individual: {self.getLimite()}\n"
+            return msg
+        else:
+            msg = f"Nome: {self.getNome()}\n"
+            msg += f"Limite individual: {self.getLimite()}\n"
+            msg += f"Sócio: {self.__socio.__nome}\n"
+            msg += f"Limite da sociedade: {self.getLimiteSociedade()}\n"
+            return msg
         
     def setNome(self, nome):
         self.__nome = nome
@@ -18,6 +30,23 @@ class Cliente:
     
     def setLimite(self, limite):
         self.__limite = limite
+    
+    def getNome(self):
+        return self.__nome
+
+    def getCpf(self):
+        return self.__cpf
+
+    def getLimite(self):
+        return self.__limite
+
+    def getLimiteSociedade(self):
+        if (self.__socio == None): return self.__limite
+        else: return self.__limite + self.__socio.__limite
+    
+    def setSocio(self, socio):
+        self.__socio = socio
+        socio.__socio = self
 
 class Empresa:
     __nome = str
@@ -37,4 +66,13 @@ class Empresa:
     
     def listar(self):
         return self.__clientes
-        
+
+cliente1 = Cliente("Alberto", "1234", 1000.0)
+cliente2 = Cliente("Jorge", "5678", 1200.0)
+print("Antes do socio")
+print(cliente1)
+print(cliente2)
+cliente1.setSocio(cliente2)
+print("Depois do socio")
+print(cliente1)
+print(cliente2)

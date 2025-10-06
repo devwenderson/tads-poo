@@ -18,14 +18,14 @@ class Conversor:
         binario = ""
         while (quo != 0):
             resto = quo % 2
-            binario = binario + str(resto)
+            binario = str(resto) + binario
             quo = quo // 2
 
-        reversed_binario = ""
-        for i in range(len(binario)):
-            reversed_binario = binario[i] + reversed_binario
+        # reversed_binario = ""
+        # for i in range(len(binario)):
+        #     reversed_binario = binario[i] + reversed_binario
 
-        return reversed_binario
+        return binario
 
-num = Conversor(182738)
+num = Conversor(14)
 print(num)
