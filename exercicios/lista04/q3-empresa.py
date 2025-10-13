@@ -45,8 +45,12 @@ class Cliente:
         else: return self.__limite + self.__socio.__limite
     
     def setSocio(self, socio):
+        if (self.__socio):
+            self.__socio = None
+            self.__socio.__socio = None
         self.__socio = socio
         socio.__socio = self
+
 
 class Empresa:
     __nome = str
@@ -69,10 +73,22 @@ class Empresa:
 
 cliente1 = Cliente("Alberto", "1234", 1000.0)
 cliente2 = Cliente("Jorge", "5678", 1200.0)
-print("Antes do socio")
+cliente3 = Cliente("Maria", "5678", 1300.0)
+
+print("======= Antes do socio =======")
 print(cliente1)
 print(cliente2)
+print(cliente3)
 cliente1.setSocio(cliente2)
-print("Depois do socio")
+cliente3.setSocio(cliente1)
+
+print("======= Depois do socio =======")
 print(cliente1)
 print(cliente2)
+print(cliente3)
+
+cliente3.setSocio(cliente2)
+print("======= Maria mudou de sócio =======")
+print(cliente1)
+print(cliente2)
+print(cliente3)
