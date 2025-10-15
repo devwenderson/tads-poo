@@ -49,7 +49,6 @@ class Data:
             if (eh_bissexto and dia > 29): raise ValueError("Dia inválido")
             elif (not(eh_bissexto) and dia > 28): raise ValueError("Dia inválido")
 
-
         self.__dia = dia
     
     def setMes(self, mes):
