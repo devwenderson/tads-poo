@@ -12,6 +12,8 @@ b = Cliente(2, "Jon Bosak")
 c = Cliente(3, "William Henry Gates III")
 
 clientes = [a, b, c]
+# with open("./aulas/aula_13/clientes.json", mode="w") as arquivo:
+#     json.dump(clientes, arquivo, default=vars, indent=4)
 
 arquivo = open("./aulas/aula_12/clientes.json", mode="w")
 json.dump(clientes, arquivo, default=vars, indent=4)
