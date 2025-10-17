@@ -1,4 +1,5 @@
 from datetime import datetime
+
 class Paciente:
     __nome = str
     __cpf = str
@@ -57,20 +58,13 @@ class Paciente:
             meses_idade += 12
         
         if (dias_idade < 0):
+            n_mes = mes_atual + (mes_atual//8)
+            dias_do_mes = 30 + (n_mes & 1)
             meses_idade -= 1
-            dias_idade += 30
-
+            dias_idade += dias_do_mes
 
         idade = f"{anos_idade} anos e {meses_idade} meses e {dias_idade} dias"
         return idade
-
-'''
-19/09/2005
-
-13/09/2025
-
-19/09/2024
-'''
 
 wenderson = Paciente("Wenderson", "123.456.789.10", "(84) 91234-5678", "19/09/2005")
 print(wenderson.calcula_idade())
