@@ -151,7 +151,7 @@ class Venda:
         texto += f"Cliente: {self.__cliente.getNome()}\n"
         texto += "Produtos: \n"
         for p in self.__produtos:
-            texto += f" - {p.getProduto().getDescricao()}"
+            texto += f" - {p.getProduto().getDescricao()}\n"
 
         return texto
 
@@ -170,6 +170,9 @@ class Venda:
 
     def setCliente(self, cliente):
         self.__cliente = cliente
+    
+    def setProdutos(self, prod):
+        self.__produtos.append(prod)
 
     # --------- GETTERS ---------
     def getId(self):
@@ -186,6 +189,9 @@ class Venda:
 
     def getCliente(self):
         return self.__cliente
+
+    def getProdutos(self):
+        return self.__produtos
 
 class VendaItem:
     __id = int
