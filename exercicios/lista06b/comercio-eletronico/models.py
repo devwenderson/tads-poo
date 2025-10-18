@@ -91,7 +91,7 @@ class Produto:
         texto += f"Descrição: {self.__descricao}\n"
         texto += f"Preço: R$ {self.__preco:0.2f}\n"
         texto += f"Estoque: {self.__estoque}\n"
-        texto += f"Categoria: {self.__categoria.getNome()}"
+        texto += f"Categoria: {self.__categoria.getNome()}\n"
         return texto
 
 
@@ -135,12 +135,12 @@ class Venda:
     __cliente = Cliente
     __produtos = []
 
-    def __init__(self, id: int, data: datetime, carrinho: bool, total: float, cliente: Cliente):
+    def __init__(self, id: int, data: datetime, carrinho: bool, cliente: Cliente):
         self.setId(id)
         self.setData(data)
         self.setCarrinho(carrinho)
-        self.setTotal(total)
         self.setCliente(cliente)
+        self.setTotal()
     
     def __str__(self):
         texto = ""
@@ -165,7 +165,10 @@ class Venda:
     def setCarrinho(self, carrinho):
         self.__carrinho = carrinho
 
-    def setTotal(self, total):
+    def setTotal(self):
+        total = 0
+        for p in self.__produtos:
+            total += p.getPreco()
         self.__total = total
 
     def setCliente(self, cliente):
@@ -173,6 +176,7 @@ class Venda:
     
     def setProdutos(self, prod):
         self.__produtos.append(prod)
+        self.setTotal()
 
     # --------- GETTERS ---------
     def getId(self):
@@ -200,10 +204,9 @@ class VendaItem:
     __venda = Venda
     __produto = Produto
 
-    def __init__(self, id: int, qtd: int, preco: float, venda: Venda, produto: Produto):
+    def __init__(self, id: int, qtd: int, venda: Venda, produto: Produto):
         self.setId(id)
         self.setQtd(qtd)
-        self.setPreco(preco)
         self.setVenda(venda)
         self.setProduto(produto)
 
@@ -212,8 +215,8 @@ class VendaItem:
         texto += f"ID: {self.__id:03d}\n"
         texto += f"Produto: {self.__produto.getDescricao()}\n"
         texto += f"Quantidade: {self.__qtd}\n"
-        texto += f"Preço Unitário: R$ {self.__preco:0.2f}\n"
-        texto += f"Subtotal: R$ {self.__qtd * self.__preco:0.2f}"
+        texto += f"Preço Unitário: R$ {self.__produto.getPreco():0.2f}\n"
+        texto += f"Subtotal: R$ {self.__preco:0.2f}\n"
         return texto
 
     # --------- SETTERS ---------
@@ -223,7 +226,9 @@ class VendaItem:
     def setQtd(self, qtd):
         self.__qtd = qtd
 
-    def setPreco(self, preco):
+    def setPreco(self):
+        produto = self.__produto
+        preco = self.__qtd * produto.getPreco()
         self.__preco = preco
 
     def setVenda(self, venda):
@@ -231,6 +236,7 @@ class VendaItem:
 
     def setProduto(self, produto):
         self.__produto = produto
+        self.setPreco()
 
     # --------- GETTERS ---------
     def getId(self):
