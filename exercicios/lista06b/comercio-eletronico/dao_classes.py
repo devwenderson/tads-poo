@@ -8,16 +8,22 @@ class ClienteDAO:
     @classmethod
     def inserir(cls, obj):
         cls.abrir() 
+        try:
+            # ----- Escreve o ID automaticamente -----
+            id = 0
+            for aux in cls.objetos:
+                if aux.id > id:
+                    id = aux.id
+            obj.setId(id + 1)
+            # ----------------------------------------
+            cls.objetos.append(obj)
+            cls.salvar()
+        except:
+            # === SE O ARQUIVO NÃO EXISTIR ===
+            obj.setId(1)
+            cls.objetos.append(obj)
+            cls.salvar()
 
-        # ----- Escreve o ID automaticamente -----
-        id = 0
-        for aux in cls.objetos:
-            if aux.id > id:
-                id = aux.id
-        obj.id = id + 1
-        # ----------------------------------------
-        cls.objetos.append(obj)
-        cls.salvar()
 
     @classmethod
     def listar(cls):
@@ -54,13 +60,19 @@ class ClienteDAO:
     
     @classmethod
     def abrir(cls):
-        cls.objetos = []
-        path = os.path.dirname(__file__)
-        with open(f"{path}/database/clientes.json", mode="r") as arquivo:
-            list_dict = json.load(arquivo)
-            for dic in list_dict:
-                c = Cliente(dic["id"], dic["nome"], dic["email"], dic["telef"])
-                cls.objetos.append(c)
+        try:
+            cls.objetos = []
+            path = os.path.dirname(__file__)
+            with open(f"{path}/database/clientes.json", mode="r") as arquivo:
+                list_dict = json.load(arquivo)
+                for dic in list_dict:
+                    c = Cliente(dic["id"], dic["nome"], dic["email"], dic["telefone"])
+                    print(c)
+                    cls.objetos.append(c)
+        except:
+            print("===== Arquivo não existe =====")
+            print("===== Criando Arquivo... =====")
+            pass
 
 class CategoriaDAO:
     objetos = [Categoria]

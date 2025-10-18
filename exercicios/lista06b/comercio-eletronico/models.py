@@ -1,10 +1,10 @@
 from datetime import datetime
 
 class Cliente:
-    __id = int
-    __nome = str
-    __email = str
-    __telefone = str
+    id = int
+    nome = str
+    email = str
+    telefone = str
 
     def __init__(self, id, nome, email, telef):
         self.setId(id)
@@ -14,41 +14,41 @@ class Cliente:
 
     def __str__(self):
         texto = ""
-        texto += f"ID: {self.__id:03d}\n"
-        texto += f"Nome: {self.__nome}\n"
-        texto += f"E-mail: {self.__email}\n"
-        texto += f"Telefone: {self.__telefone}"
+        texto += f"ID: {self.id:03d}\n"
+        texto += f"Nome: {self.nome}\n"
+        texto += f"E-mail: {self.email}\n"
+        texto += f"Telefone: {self.telefone}\n"
         return texto
 
     # --------- SETTERS ---------
     def setId(self, id):
-        self.__id = id
+        self.id = id
 
     def setNome(self, nome):
-        self.__nome = nome
+        self.nome = nome
 
     def setEmail(self, email):
-        self.__email = email
+        self.email = email
 
     def setTelefone(self, telefone):
-        self.__telefone = telefone
+        self.telefone = telefone
 
     # --------- GETTERS ---------
     def getId(self):
-        return self.__id
+        return self.id
 
     def getNome(self):
-        return self.__nome
+        return self.nome
 
     def getEmail(self):
-        return self.__email
+        return self.email
 
     def getTelefone(self):
-        return self.__telefone
+        return self.telefone
 
 class Categoria:
-    __id = int
-    __nome = str
+    id = int
+    nome = str
 
     def __init__(self, id, nome):
         self.setId(id)
@@ -59,24 +59,24 @@ class Categoria:
 
     # --------- SETTERS ---------
     def setId(self, id):
-        self.__id = id
+        self.id = id
 
     def setNome(self, nome):
-        self.__nome = nome
+        self.nome = nome
 
     # --------- GETTERS ---------
     def getId(self):
-        return self.__id
+        return self.id
 
     def getNome(self):
-        return self.__nome
+        return self.nome
 
 class Produto:
-    __id = int
-    __descricao = str
-    __preco = float
-    __estoque = int
-    __categoria = Categoria 
+    id = int
+    descricao = str
+    preco = float
+    estoque = int
+    categoria = Categoria 
 
     def __init__(self, id, descricao, preco, estoque, categoria):
         self.setId(id)
@@ -87,53 +87,53 @@ class Produto:
     
     def __str__(self):
         texto = ""
-        texto += f"ID: {self.__id:03d}\n"
-        texto += f"Descrição: {self.__descricao}\n"
-        texto += f"Preço: R$ {self.__preco:0.2f}\n"
-        texto += f"Estoque: {self.__estoque}\n"
-        texto += f"Categoria: {self.__categoria.getNome()}\n"
+        texto += f"ID: {self.id:03d}\n"
+        texto += f"Descrição: {self.descricao}\n"
+        texto += f"Preço: R$ {self.preco:0.2f}\n"
+        texto += f"Estoque: {self.estoque}\n"
+        texto += f"Categoria: {self.categoria.getNome()}\n"
         return texto
 
 
     # --------- SETTERS ---------
     def setId(self, id):
-        self.__id = id
+        self.id = id
 
     def setDescricao(self, descricao):
-        self.__descricao = descricao
+        self.descricao = descricao
 
     def setPreco(self, preco):
-        self.__preco = preco
+        self.preco = preco
 
     def setEstoque(self, estoque):
-        self.__estoque = estoque
+        self.estoque = estoque
 
     def setCategoria(self, categoria):
-        self.__categoria = categoria
+        self.categoria = categoria
 
     # --------- GETTERS ---------
     def getId(self):
-        return self.__id
+        return self.id
 
     def getDescricao(self):
-        return self.__descricao
+        return self.descricao
 
     def getPreco(self):
-        return self.__preco
+        return self.preco
 
     def getEstoque(self):
-        return self.__estoque
+        return self.estoque
 
     def getCategoria(self):
-        return self.__categoria
+        return self.categoria
 
 class Venda:
-    __id = int
-    __data = datetime
-    __carrinho = bool
-    __total = float
-    __cliente = Cliente
-    __produtos = []
+    id = int
+    data = datetime
+    carrinho = bool
+    total = float
+    cliente = Cliente
+    produtos = []
 
     def __init__(self, id: int, data: datetime, carrinho: bool, cliente: Cliente):
         self.setId(id)
@@ -144,64 +144,64 @@ class Venda:
     
     def __str__(self):
         texto = ""
-        texto += f"ID: {self.__id:03d}\n"
-        texto += f"Data da venda: {self.__data.strftime("%d/%m/%Y")}\n"
-        texto += f"Carrinho: {self.__carrinho}\n"
-        texto += f"Total: R$ {self.__total:0.2f}\n"
-        texto += f"Cliente: {self.__cliente.getNome()}\n"
+        texto += f"ID: {self.id:03d}\n"
+        texto += f"Data da venda: {self.data.strftime("%d/%m/%Y")}\n"
+        texto += f"Carrinho: {self.carrinho}\n"
+        texto += f"Total: R$ {self.total:0.2f}\n"
+        texto += f"Cliente: {self.cliente.getNome()}\n"
         texto += "Produtos: \n"
-        for p in self.__produtos:
+        for p in self.produtos:
             texto += f" - {p.getProduto().getDescricao()}\n"
 
         return texto
 
     # --------- SETTERS ---------
     def setId(self, id):
-        self.__id = id
+        self.id = id
 
     def setData(self, data):
-        self.__data = data
+        self.data = data
 
     def setCarrinho(self, carrinho):
-        self.__carrinho = carrinho
+        self.carrinho = carrinho
 
     def setTotal(self):
         total = 0
-        for p in self.__produtos:
+        for p in self.produtos:
             total += p.getPreco()
-        self.__total = total
+        self.total = total
 
     def setCliente(self, cliente):
-        self.__cliente = cliente
+        self.cliente = cliente
     
     def setProdutos(self, prod):
-        self.__produtos.append(prod)
+        self.produtos.append(prod)
         self.setTotal()
 
     # --------- GETTERS ---------
     def getId(self):
-        return self.__id
+        return self.id
 
     def getData(self):
-        return self.__data
+        return self.data
 
     def getCarrinho(self):
-        return self.__carrinho
+        return self.carrinho
 
     def getTotal(self):
-        return self.__total
+        return self.total
 
     def getCliente(self):
-        return self.__cliente
+        return self.cliente
 
     def getProdutos(self):
-        return self.__produtos
+        return self.produtos
 
 class VendaItem:
-    __id = int
-    __qtd = int
-    __preco = float
-    __venda = Venda
+    id = int
+    qtd = int
+    preco = float
+    venda = Venda
     __produto = Produto
 
     def __init__(self, id: int, qtd: int, venda: Venda, produto: Produto):
@@ -212,47 +212,47 @@ class VendaItem:
 
     def __str__(self):
         texto = ""
-        texto += f"ID: {self.__id:03d}\n"
-        texto += f"Produto: {self.__produto.getDescricao()}\n"
-        texto += f"Quantidade: {self.__qtd}\n"
-        texto += f"Preço Unitário: R$ {self.__produto.getPreco():0.2f}\n"
-        texto += f"Subtotal: R$ {self.__preco:0.2f}\n"
+        texto += f"ID: {self.id:03d}\n"
+        texto += f"Produto: {self.produto.getDescricao()}\n"
+        texto += f"Quantidade: {self.qtd}\n"
+        texto += f"Preço Unitário: R$ {self.produto.getPreco():0.2f}\n"
+        texto += f"Subtotal: R$ {self.preco:0.2f}\n"
         return texto
 
     # --------- SETTERS ---------
     def setId(self, id):
-        self.__id = id
+        self.id = id
 
     def setQtd(self, qtd):
-        self.__qtd = qtd
+        self.qtd = qtd
 
     def setPreco(self):
-        produto = self.__produto
-        preco = self.__qtd * produto.getPreco()
-        self.__preco = preco
+        produto = self.produto
+        preco = self.qtd * produto.getPreco()
+        self.preco = preco
 
     def setVenda(self, venda):
-        self.__venda = venda
+        self.venda = venda
 
     def setProduto(self, produto):
-        self.__produto = produto
+        self.produto = produto
         self.setPreco()
 
     # --------- GETTERS ---------
     def getId(self):
-        return self.__id
+        return self.id
 
     def getQtd(self):
-        return self.__qtd
+        return self.qtd
 
     def getPreco(self):
-        return self.__preco
+        return self.preco
 
     def getVenda(self):
-        return self.__venda
+        return self.venda
 
     def getProduto(self):
-        return self.__produto
+        return self.produto
 
 
 
