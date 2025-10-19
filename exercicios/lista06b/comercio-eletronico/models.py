@@ -55,7 +55,7 @@ class Categoria:
         self.setNome(nome)
     
     def __str__(self):
-        return f"ID: {self.__id:03d} - Nome: {self.__nome}"
+        return f"ID: {self.id:03d} - Nome: {self.nome}\n"
 
     # --------- SETTERS ---------
     def setId(self, id):

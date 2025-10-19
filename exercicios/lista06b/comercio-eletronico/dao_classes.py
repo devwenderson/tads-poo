@@ -67,26 +67,28 @@ class ClienteDAO:
                 list_dict = json.load(arquivo)
                 for dic in list_dict:
                     c = Cliente(dic["id"], dic["nome"], dic["email"], dic["telefone"])
-                    print(c)
                     cls.objetos.append(c)
         except:
             print("===== Arquivo não existe =====")
-            print("===== Criando Arquivo... =====")
-            pass
 
 class CategoriaDAO:
     objetos = [Categoria]
 
     @classmethod
     def inserir(cls, obj):
-        cls.abrir()
-        id = 0
-        for aux in cls.objetos:
-            if aux.id > id:
-                id = aux.id
-        obj.id = id + 1
-        cls.objetos.append(obj)
-        cls.salvar()
+        try:
+            cls.abrir()
+            id = 0
+            for aux in cls.objetos:
+                if aux.id > id:
+                    id = aux.id
+            obj.id = id + 1
+            cls.objetos.append(obj)
+            cls.salvar()
+        except:
+            obj.setId(1)
+            cls.objetos.append(obj)
+            cls.salvar()
 
     @classmethod
     def listar(cls):
@@ -123,27 +125,35 @@ class CategoriaDAO:
     
     @classmethod
     def abrir(cls):
-        cls.objetos = []
-        path = os.path.dirname(__file__)
-        with open(f"{path}/database/categorias.json", mode="r") as arquivo:
-            list_dict = json.load(arquivo)
-            for dic in list_dict:
-                c = Categoria(dic["id"], dic["nome"])
-                cls.objetos.append(c)
+        try:
+            cls.objetos = []
+            path = os.path.dirname(__file__)
+            with open(f"{path}/database/categorias.json", mode="r") as arquivo:
+                list_dict = json.load(arquivo)
+                for dic in list_dict:
+                    c = Categoria(dic["id"], dic["nome"])
+                    cls.objetos.append(c)
+        except:
+            pass
 
 class ProdutoDAO:
     objetos = [Produto]
 
     @classmethod
     def inserir(cls, obj):
-        cls.abrir()
-        id = 0
-        for aux in cls.objetos:
-            if aux.id > id:
-                id = aux.id
-        obj.id = id + 1
-        cls.objetos.append(obj)
-        cls.salvar()
+        try:
+            cls.abrir()
+            id = 0
+            for aux in cls.objetos:
+                if aux.id > id:
+                    id = aux.id
+            obj.id = id + 1
+            cls.objetos.append(obj)
+            cls.salvar()
+        except:
+            obj.setId(1)
+            cls.objetos.append(obj)
+            cls.salvar()
 
     @classmethod
     def listar(cls):
@@ -185,14 +195,18 @@ class ProdutoDAO:
         with open(f"{path}/database/produtos.json", mode="r") as arquivo:
             list_dict = json.load(arquivo)
             for dic in list_dict:
-                c = Produto(
+                categoria = Categoria(
+                    dic["categoria"]["id"],
+                    dic["categoria"]["nome"],
+                )
+                p = Produto(
                     dic["id"], 
                     dic["descricao"], 
                     dic["preco"], 
                     dic["estoque"], 
-                    dic["categoria"]
+                    categoria
                 )
-                cls.objetos.append(c)
+                cls.objetos.append(p)
 
 class VendaDAO:
     objetos = [Venda]

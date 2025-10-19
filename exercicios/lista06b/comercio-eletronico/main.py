@@ -2,6 +2,7 @@ from models import Cliente, Categoria, Produto, Venda, VendaItem
 from dao_classes import ClienteDAO, CategoriaDAO, ProdutoDAO, VendaDAO, VendaItemDAO
 
 class UI:
+    @staticmethod
     def menu():
         opcoes = ""
         opcoes += "1 - Inserir Cliente\n"
@@ -23,19 +24,20 @@ class UI:
         print(opcoes)
         return int(input("Informe uma opção: "))
 
+    @staticmethod
     def main():
         op = 0
         while op != 13:
             op = UI.menu()
 
             if op == 1:
-                UI.inserir_usuario()
+                UI.inserir_cliente()
             elif op == 2:
-                UI.listar_usuario()
+                UI.listar_cliente()
             elif op == 3:
-                UI.atualizar_usuario()
+                UI.atualizar_cliente()
             elif op == 4:
-                UI.excluir_usuario()
+                UI.excluir_cliente()
             elif op == 5:
                 UI.inserir_categoria()
             elif op == 6:
@@ -59,8 +61,8 @@ class UI:
 
     # --------- Clientes ---------
     @staticmethod
-    def inserir_usuario():
-        print("----- INSERIR CLIENTE -----\n")
+    def inserir_cliente():
+        print("\n----- INSERIR CLIENTE -----\n")
         
         nome = input("Nome: ")
         email = input("E-mail: ")
@@ -70,52 +72,124 @@ class UI:
         ClienteDAO.inserir(cliente)
         print("Cliente cadastrado com sucesso\n")
 
-
     @staticmethod
-    def listar_usuario():
-        print("----- LISTAR CLIENTES -----")
+    def listar_cliente():
+        print("\n----- LISTAR CLIENTES -----")
         clientes = ClienteDAO.listar()
+        for cli in clientes:
+            print(cli)
 
     @staticmethod
-    def atualizar_usuario():
-        pass
+    def atualizar_cliente():
+        print("\n----- ATUALIZAR CLIENTE -----\n")
+        UI.listar_cliente()
+        
+        print("Escolha o ID para atualizar")
+        id = int(input("ID: "))
+        nome = input("Nome: ")
+        email = input("E-mail: ")
+        telefone = input("Telefone: ")
+
+        cliente = Cliente(id, nome, email, telefone)
+        ClienteDAO.atualizar(cliente)
+        print("Cliente atualizado com sucesso\n")
 
     @staticmethod
-    def excluir_usuario():
-        pass
+    def excluir_cliente():
+        print("\n----- EXCLUIR CLIENTE -----\n")
+        UI.listar_cliente()
+
+        print("Escolha o ID para excluir")
+        id = int(input("ID: "))
+        cliente = Cliente(id, nome="", email="", telef="")
+        ClienteDAO.excluir(cliente)
+        print("Cliente excluído com sucesso\n")
 
     # --------- Categorias ---------
     @staticmethod
     def inserir_categoria():
-        pass
+        print("\n----- INSERIR CATEGORIA -----\n")
+        nome = input("Nome da categoria: ")
+        categoria = Categoria(0, nome)
+        CategoriaDAO.inserir(categoria)
+        print("Categoria cadastrada com sucesso\n")
+        
 
     @staticmethod
     def listar_categoria():
-        pass
+        print("\n----- LISTAR CATEGORIAS -----\n")
+        categorias = CategoriaDAO.listar()
+        for c in categorias:
+            print(c)
+        
 
     @staticmethod
     def atualizar_categoria():
-        pass
+        print("\n----- ATUALIZAR CATEGORIA -----\n")
+        UI.listar_categoria()
+        id = int(input("Insira o ID a ser atualizado: "))
+        nome = input("Nome da categoria: ")
+        categoria = Categoria(id, nome)
+        CategoriaDAO.atualizar(categoria)
 
     @staticmethod
     def excluir_categoria():
-        pass
+        print("\n----- EXCLUIR CATEGORIA -----\n")
+        UI.listar_categoria()
+        id = int(input("Insira o ID a ser excluído: "))
+        categoria = Categoria(id, nome="")
+        CategoriaDAO.excluir(categoria)
 
     # --------- Produtos ---------
     @staticmethod
     def inserir_produto():
-        pass
+        print("\n----- INSERIR PRODUTO -----\n")
+
+        descricao = input("Descrição do produto: ")
+        preco = float(input("Preço: "))
+        estoque = int(input("Quant. em estoque: "))
+
+        print("\n----- CATEGORIAS -----\n")
+        UI.listar_categoria()
+        print("\n----- ---------- -----\n")
+        categoria_id = int(input("Informe o id da categoria: "))
+        categoria = CategoriaDAO.busca_obj(categoria_id)
+        produto = Produto(0, descricao, preco, estoque, categoria)
+        ProdutoDAO.inserir(produto)
+        
 
     @staticmethod
     def listar_produto():
-        pass
-
+        print("\n----- LISTAR PRODUTOS -----\n")
+        produtos = ProdutoDAO.listar()
+        for prod in produtos:
+            print(prod)
+        
     @staticmethod
     def atualizar_produto():
-        pass
+        print("\n----- ATUALIZAR PRODUTO -----\n")
+        UI.listar_produto()
+        id = int(input("Informe o ID a ser atualizado: "))
+        descricao = input("Descrição do produto: ")
+        preco = float(input("Preço: "))
+        estoque = int(input("Quant. em estoque: "))
+
+        print("\n----- CATEGORIAS -----\n")
+        UI.listar_categoria()
+        print("\n----- ---------- -----\n")
+
+        categoria_id = int(input("Informe o id da categoria: "))
+        categoria = CategoriaDAO.busca_obj(categoria_id)
+        produto = Produto(id, descricao, preco, estoque, categoria)
+
+        ProdutoDAO.atualizar(produto)
 
     @staticmethod
     def excluir_produto():
-        pass
+        print("\n----- EXCLUIR PRODUTO -----\n")
+        UI.listar_produto()
+        id = int(input("Informe o ID a ser excluído: "))
+        produto = Produto(id, descricao="", preco=0.0, estoque=0, categoria=None)
+        ProdutoDAO.excluir(produto)
 
 UI.main()

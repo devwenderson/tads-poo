@@ -1,0 +1,12 @@
+[
+    {
+        "id": 2,
+        "descricao": "Galaxy Z30 10G",
+        "preco": 8999.5,
+        "estoque": 2,
+        "categoria": {
+            "id": 2,
+            "nome": "Eletr\u00f4nico"
+        }
+    }
+]
