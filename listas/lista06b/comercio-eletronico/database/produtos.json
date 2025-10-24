@@ -4,20 +4,14 @@
         "descricao": "Liquidificador",
         "preco": 230.0,
         "estoque": 50,
-        "categoria": {
-            "id": 3,
-            "nome": "Eletrodom\u00e9stico"
-        }
+        "categoria": 3
     },
     {
         "id": 2,
         "descricao": "Microondas",
         "preco": 345.0,
         "estoque": 30,
-        "categoria": {
-            "id": 3,
-            "nome": "Eletrodom\u00e9stico"
-        }
+        "categoria": 3
     },
     {
         "id": 3,

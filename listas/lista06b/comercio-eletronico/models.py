@@ -150,8 +150,8 @@ class Venda:
         texto += f"Total: R$ {self.total:0.2f}\n"
         texto += f"Cliente: {self.cliente}\n"
         texto += "Produtos: \n"
-        for p in self.produtos:
-            texto += f" - {p.getProduto()}\n"
+        for pro in self.produtos:
+            texto += f" - {pro}\n"
 
         return texto
 
