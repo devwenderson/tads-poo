@@ -6,7 +6,7 @@ class Cliente:
     email = str
     telefone = str
 
-    def __init__(self, id, nome, email, telef):
+    def __init__(self, id: int, nome: str, email: str, telef: str):
         self.setId(id)
         self.setNome(nome)
         self.setEmail(email)
@@ -76,9 +76,9 @@ class Produto:
     descricao = str
     preco = float
     estoque = int
-    categoria = Categoria 
+    categoria = int
 
-    def __init__(self, id, descricao, preco, estoque, categoria):
+    def __init__(self, id: int, descricao: str, preco: float, estoque: int, categoria: int):
         self.setId(id)
         self.setDescricao(descricao)
         self.setPreco(preco)
@@ -91,7 +91,7 @@ class Produto:
         texto += f"Descrição: {self.descricao}\n"
         texto += f"Preço: R$ {self.preco:0.2f}\n"
         texto += f"Estoque: {self.estoque}\n"
-        texto += f"Categoria: {self.categoria.getNome()}\n"
+        texto += f"Categoria: {self.categoria}\n"
         return texto
 
 
@@ -132,10 +132,10 @@ class Venda:
     data = datetime
     carrinho = bool
     total = float
-    cliente = Cliente
+    cliente = int
     produtos = []
 
-    def __init__(self, id: int, data: datetime, carrinho: bool, cliente: Cliente):
+    def __init__(self, id: int, data: datetime, carrinho: bool, cliente: int):
         self.setId(id)
         self.setData(data)
         self.setCarrinho(carrinho)
@@ -148,10 +148,10 @@ class Venda:
         texto += f"Data da venda: {self.data.strftime("%d/%m/%Y")}\n"
         texto += f"Carrinho: {self.carrinho}\n"
         texto += f"Total: R$ {self.total:0.2f}\n"
-        texto += f"Cliente: {self.cliente.getNome()}\n"
+        texto += f"Cliente: {self.cliente}\n"
         texto += "Produtos: \n"
         for p in self.produtos:
-            texto += f" - {p.getProduto().getDescricao()}\n"
+            texto += f" - {p.getProduto()}\n"
 
         return texto
 
@@ -201,10 +201,10 @@ class VendaItem:
     id = int
     qtd = int
     preco = float
-    venda = Venda
-    __produto = Produto
+    venda = int
+    produto = int
 
-    def __init__(self, id: int, qtd: int, venda: Venda, produto: Produto):
+    def __init__(self, id: int, qtd: int, venda: Venda, produto: int):
         self.setId(id)
         self.setQtd(qtd)
         self.setVenda(venda)

@@ -1,12 +1,29 @@
 [
     {
-        "id": 2,
-        "descricao": "Galaxy Z30 10G",
-        "preco": 8999.5,
-        "estoque": 2,
+        "id": 1,
+        "descricao": "Liquidificador",
+        "preco": 230.0,
+        "estoque": 50,
         "categoria": {
-            "id": 2,
-            "nome": "Eletr\u00f4nico"
+            "id": 3,
+            "nome": "Eletrodom\u00e9stico"
         }
+    },
+    {
+        "id": 2,
+        "descricao": "Microondas",
+        "preco": 345.0,
+        "estoque": 30,
+        "categoria": {
+            "id": 3,
+            "nome": "Eletrodom\u00e9stico"
+        }
+    },
+    {
+        "id": 3,
+        "descricao": "Mouse",
+        "preco": 20.0,
+        "estoque": 50,
+        "categoria": 1
     }
 ]

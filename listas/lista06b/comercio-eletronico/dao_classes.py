@@ -195,16 +195,12 @@ class ProdutoDAO:
         with open(f"{path}/database/produtos.json", mode="r") as arquivo:
             list_dict = json.load(arquivo)
             for dic in list_dict:
-                categoria = Categoria(
-                    dic["categoria"]["id"],
-                    dic["categoria"]["nome"],
-                )
                 p = Produto(
                     dic["id"], 
                     dic["descricao"], 
                     dic["preco"], 
                     dic["estoque"], 
-                    categoria
+                    dic["categoria"]
                 )
                 cls.objetos.append(p)
 

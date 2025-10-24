@@ -153,8 +153,7 @@ class UI:
         UI.listar_categoria()
         print("\n----- ---------- -----\n")
         categoria_id = int(input("Informe o id da categoria: "))
-        categoria = CategoriaDAO.busca_obj(categoria_id)
-        produto = Produto(0, descricao, preco, estoque, categoria)
+        produto = Produto(0, descricao, preco, estoque, categoria_id)
         ProdutoDAO.inserir(produto)
         
 
