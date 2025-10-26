@@ -56,7 +56,7 @@ class ClienteDAO:
     def salvar(cls):
         path = os.path.dirname(__file__)
         with open(f"{path}/database/clientes.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default=vars, indent=4)
+            json.dump(cls.objetos, arquivo, default=Cliente.to_json, indent=4)
     
     @classmethod
     def abrir(cls):
@@ -66,7 +66,7 @@ class ClienteDAO:
             with open(f"{path}/database/clientes.json", mode="r") as arquivo:
                 list_dict = json.load(arquivo)
                 for dic in list_dict:
-                    c = Cliente(dic["id"], dic["nome"], dic["email"], dic["telefone"])
+                    c = Cliente.from_json(dic)
                     cls.objetos.append(c)
         except:
             print("===== Arquivo não existe =====")
@@ -121,7 +121,7 @@ class CategoriaDAO:
     def salvar(cls):
         path = os.path.dirname(__file__)
         with open(f"{path}/database/categorias.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default=vars, indent=4)
+            json.dump(cls.objetos, arquivo, default=Categoria.to_json, indent=4)
     
     @classmethod
     def abrir(cls):
@@ -131,7 +131,7 @@ class CategoriaDAO:
             with open(f"{path}/database/categorias.json", mode="r") as arquivo:
                 list_dict = json.load(arquivo)
                 for dic in list_dict:
-                    c = Categoria(dic["id"], dic["nome"])
+                    c = Categoria.from_json(dic)
                     cls.objetos.append(c)
         except:
             pass
@@ -186,7 +186,7 @@ class ProdutoDAO:
     def salvar(cls):
         path = os.path.dirname(__file__)
         with open(f"{path}/database/produtos.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default=vars, indent=4)
+            json.dump(cls.objetos, arquivo, default=Produto.to_json, indent=4)
     
     @classmethod
     def abrir(cls):
@@ -195,13 +195,7 @@ class ProdutoDAO:
         with open(f"{path}/database/produtos.json", mode="r") as arquivo:
             list_dict = json.load(arquivo)
             for dic in list_dict:
-                p = Produto(
-                    dic["id"], 
-                    dic["descricao"], 
-                    dic["preco"], 
-                    dic["estoque"], 
-                    dic["categoria"]
-                )
+                p = Produto.from_json(dic)
                 cls.objetos.append(p)
 
 class VendaDAO:
@@ -249,7 +243,7 @@ class VendaDAO:
     def salvar(cls):
         path = os.path.dirname(__file__)
         with open(f"{path}/database/vendas.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default=vars, indent=4)
+            json.dump(cls.objetos, arquivo, default=Venda.to_json, indent=4)
     
     @classmethod
     def abrir(cls):
@@ -258,13 +252,7 @@ class VendaDAO:
         with open(f"{path}/database/vendas.json", mode="r") as arquivo:
             list_dict = json.load(arquivo)
             for dic in list_dict:
-                c = Venda(
-                    dic["id"],
-                    dic["data"],
-                    dic["carrinho"],
-                    dic["total"],
-                    dic["cliente"]
-                )
+                c = Venda.from_json(dic)
                 cls.objetos.append(c)
 
 class VendaItemDAO:
@@ -312,7 +300,7 @@ class VendaItemDAO:
     def salvar(cls):
         path = os.path.dirname(__file__)
         with open(f"{path}/database/venda-tens.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default=vars, indent=4)
+            json.dump(cls.objetos, arquivo, default=VendaItem.to_json, indent=4)
     
     @classmethod
     def abrir(cls):
@@ -321,11 +309,5 @@ class VendaItemDAO:
         with open(f"{path}/database/venda-itens.json", mode="r") as arquivo:
             list_dict = json.load(arquivo)
             for dic in list_dict:
-                c = VendaItem(
-                    dic["id"],
-                    dic["qtd"],
-                    dic["preco"],
-                    dic["venda"],
-                    dic["produto"]
-                )
+                c = VendaItem.from_json(dic)
                 cls.objetos.append(c)

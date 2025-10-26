@@ -20,16 +20,16 @@ fone = Produto(5, "Fone de Ouvido Bluetooth", 299.99, 50, eletr)
 mouse = Produto(6, "Mouse Gamer", 149.90, 40, eletr)
 
 # ------ VENDAS ----------
-venda1 = Venda(101, datetime(2025, 10, 15, 14, 30), False, joao)
-venda2 = Venda(102, datetime(2025, 10, 16, 10, 45), False, ana)
+venda1 = Venda(101, datetime(2025, 10, 15), False, joao.getId())
+venda2 = Venda(102, datetime(2025, 10, 16), False, ana.getId())
 
 # ------ ITENS VENDAS ----------
-item_1_venda_1 = VendaItem(1, 2, venda1, smartphone)
-item_2_venda_1 = VendaItem(2, 3, venda1, mouse)
+item_1_venda_1 = VendaItem(1, 2, venda1, smartphone, smartphone.getPreco())
+item_2_venda_1 = VendaItem(2, 3, venda1, mouse, mouse.getPreco())
 itens_venda_1 = [item_1_venda_1, item_2_venda_1]
 
 # ------ ADICIONA ITENS NAS VENDAS ----------
 for item in itens_venda_1:
-    venda1.setProdutos(item)
+    venda1.setProdutos(item.getId())
 
 print(venda1)
