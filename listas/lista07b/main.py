@@ -1,5 +1,6 @@
 from models import Cliente, Categoria, Produto, Venda, VendaItem
 from dao_classes import ClienteDAO, CategoriaDAO, ProdutoDAO, VendaDAO, VendaItemDAO
+from views import View
 
 class UI:
     @staticmethod
@@ -68,31 +69,34 @@ class UI:
         email = input("E-mail: ")
         telefone = input("Telefone: ")
 
-        cliente = Cliente(0, nome, email, telefone)
-        ClienteDAO.inserir(cliente)
+        View.cliente_inserir(nome, email, telefone)
         print("Cliente cadastrado com sucesso\n")
 
     @staticmethod
     def listar_cliente():
         print("\n----- LISTAR CLIENTES -----")
-        clientes = ClienteDAO.listar()
+        clientes = View.cliente_listar()
         for cli in clientes:
             print(cli)
 
     @staticmethod
     def atualizar_cliente():
         print("\n----- ATUALIZAR CLIENTE -----\n")
-        UI.listar_cliente()
-        
-        print("Escolha o ID para atualizar")
-        id = int(input("ID: "))
-        nome = input("Nome: ")
-        email = input("E-mail: ")
-        telefone = input("Telefone: ")
+        try:
+            UI.listar_cliente()
+            
+            print("Escolha o ID para atualizar")
+            id = int(input("ID: "))
+            nome = input("Nome: ")
+            email = input("E-mail: ")
+            telefone = input("Telefone: ")
 
-        cliente = Cliente(id, nome, email, telefone)
-        ClienteDAO.atualizar(cliente)
-        print("Cliente atualizado com sucesso\n")
+            View.cliente_atualizar(id, nome, email, telefone)
+            
+            print("Cliente atualizado com sucesso\n")
+        except:
+            print("Algum dado está incorreto\n")
+
 
     @staticmethod
     def excluir_cliente():
@@ -101,8 +105,7 @@ class UI:
 
         print("Escolha o ID para excluir")
         id = int(input("ID: "))
-        cliente = Cliente(id, nome="", email="", telef="")
-        ClienteDAO.excluir(cliente)
+        View.cliente_excluir(id)
         print("Cliente excluído com sucesso\n")
 
     # --------- Categorias ---------
