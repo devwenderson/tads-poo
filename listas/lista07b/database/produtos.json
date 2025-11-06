@@ -1,9 +1,9 @@
 [
     {
         "id": 2,
-        "descricao": "Mouse",
-        "preco": 25.0,
-        "estoque": 123,
+        "descricao": "Mouse simples de escrit\u00f3rio gamer",
+        "preco": 60.0,
+        "estoque": 150,
         "categoria": 1
     }
 ]

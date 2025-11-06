@@ -1,5 +1,6 @@
 from models import Cliente, Categoria, Produto, Venda, VendaItem
 from dao_classes import ClienteDAO, CategoriaDAO, ProdutoDAO, VendaDAO, VendaItemDAO
+from utils import verifica_valor
 
 class View:
     # ===== CLIENTES =====
@@ -15,12 +16,20 @@ class View:
 
     @staticmethod
     def cliente_atualizar(id, nome, email, telefone):
+        id = int(id)
+        antigo_cli = ClienteDAO.busca_obj(id)
+
+        nome = verifica_valor(antigo_cli.getNome(), nome, str)
+        email = verifica_valor(antigo_cli.getEmail(), email, str)
+        telefone = verifica_valor(antigo_cli.getTelefone(), telefone, str)
+
         cliente = Cliente(id, nome, email, telefone)
         ClienteDAO.atualizar(cliente)
 
 
     @staticmethod
     def cliente_excluir(id):
+        id = int(id)
         View.listar_cliente()
         cliente = Cliente(id, nome="", email="", telef="")
         ClienteDAO.excluir(cliente)
@@ -40,6 +49,12 @@ class View:
         
     @staticmethod
     def categoria_atualizar(id, nome):
+        id = int(id)
+
+        antiga_categ = CategoriaDAO.busca_obj(id)
+
+        nome = verifica_valor(antiga_categ.getNome(), nome, str)
+
         categoria = Categoria(id, nome)
         CategoriaDAO.atualizar(categoria)
 
@@ -63,6 +78,14 @@ class View:
         
     @staticmethod
     def produto_atualizar(id, descricao, preco, estoque, categoria_id):
+        id = int(id)
+        antigo_produto = ProdutoDAO.busca_obj(id)
+
+        descricao = verifica_valor(antigo_produto.getDescricao(), descricao, str)
+        preco = verifica_valor(antigo_produto.getPreco(), preco, float)
+        estoque = verifica_valor(antigo_produto.getEstoque(), estoque, int)
+        categoria_id = verifica_valor(antigo_produto.getCategoria(), categoria_id, int)
+
         produto = Produto(id, descricao, preco, estoque, categoria_id)
         ProdutoDAO.atualizar(produto)
 

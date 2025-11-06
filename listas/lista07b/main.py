@@ -89,7 +89,7 @@ class UI:
             UI.listar_cliente()
             
             print("Escolha o ID para atualizar")
-            id = int(input("ID: "))
+            id = input("ID: ")
             nome = input("Nome: ")
             email = input("E-mail: ")
             telefone = input("Telefone: ")
@@ -174,16 +174,16 @@ class UI:
     def atualizar_produto():
         print("\n----- ATUALIZAR PRODUTO -----\n")
         UI.listar_produto()
-        id = int(input("Informe o ID a ser atualizado: "))
+        id = input("Informe o ID a ser atualizado: ")
         descricao = input("Descrição do produto: ")
-        preco = float(input("Preço: "))
-        estoque = int(input("Quant. em estoque: "))
+        preco = input("Preço: ")
+        estoque = input("Quant. em estoque: ")
 
         print("\n----- CATEGORIAS -----\n")
         UI.listar_categoria()
         print("\n----- ---------- -----\n")
 
-        categoria_id = int(input("Informe o id da categoria: "))
+        categoria_id = input("Informe o id da categoria: ")
         View.produto_atualizar(id, descricao, preco, estoque, categoria_id)
 
     @staticmethod

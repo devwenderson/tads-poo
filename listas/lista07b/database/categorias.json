@@ -10,5 +10,9 @@
     {
         "id": 3,
         "nome": "Eletrodom\u00e9stico"
+    },
+    {
+        "id": 4,
+        "nome": "Categoria nova"
     }
 ]
