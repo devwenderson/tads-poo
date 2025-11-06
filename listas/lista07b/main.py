@@ -113,15 +113,14 @@ class UI:
     def inserir_categoria():
         print("\n----- INSERIR CATEGORIA -----\n")
         nome = input("Nome da categoria: ")
-        categoria = Categoria(0, nome)
-        CategoriaDAO.inserir(categoria)
+        View.categoria_inserir(nome)
         print("Categoria cadastrada com sucesso\n")
         
 
     @staticmethod
     def listar_categoria():
         print("\n----- LISTAR CATEGORIAS -----\n")
-        categorias = CategoriaDAO.listar()
+        categorias = View.categoria_listar()
         for c in categorias:
             print(c)
         
@@ -132,16 +131,15 @@ class UI:
         UI.listar_categoria()
         id = int(input("Insira o ID a ser atualizado: "))
         nome = input("Nome da categoria: ")
-        categoria = Categoria(id, nome)
-        CategoriaDAO.atualizar(categoria)
+        View.categoria_atualizar(id, nome)
+        print("\n----- CATEGORIA ATUALIZADA! -----\n")
 
     @staticmethod
     def excluir_categoria():
         print("\n----- EXCLUIR CATEGORIA -----\n")
         UI.listar_categoria()
         id = int(input("Insira o ID a ser excluído: "))
-        categoria = Categoria(id, nome="")
-        CategoriaDAO.excluir(categoria)
+        View.categoria_excluir(id)
 
     # --------- Produtos ---------
     @staticmethod
