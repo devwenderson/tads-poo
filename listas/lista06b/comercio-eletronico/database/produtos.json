@@ -1,12 +1,5 @@
 [
     {
-        "id": 1,
-        "descricao": "Liquidificador",
-        "preco": 230.0,
-        "estoque": 50,
-        "categoria": 3
-    },
-    {
         "id": 2,
         "descricao": "Microondas",
         "preco": 345.0,
@@ -19,5 +12,12 @@
         "preco": 20.0,
         "estoque": 50,
         "categoria": 1
+    },
+    {
+        "id": 1,
+        "descricao": "Liquidificador",
+        "preco": 250.0,
+        "estoque": 100,
+        "categoria": 3
     }
 ]

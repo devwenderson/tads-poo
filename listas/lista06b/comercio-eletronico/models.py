@@ -91,14 +91,14 @@ class Produto:
     descricao = str
     preco = float
     estoque = int
-    categoria_id = int
+    categoria = int
 
-    def __init__(self, id: int, descricao: str, preco: float, estoque: int, categoria_id: int):
+    def __init__(self, id: int, descricao: str, preco: float, estoque: int, categoria: int):
         self.setId(id)
         self.setDescricao(descricao)
         self.setPreco(preco)
         self.setEstoque(estoque)
-        self.setCategoria(categoria_id)
+        self.setCategoria(categoria)
     
     def __str__(self):
         texto = ""
@@ -106,7 +106,7 @@ class Produto:
         texto += f"Descrição: {self.descricao}\n"
         texto += f"Preço: R$ {self.preco:0.2f}\n"
         texto += f"Estoque: {self.estoque}\n"
-        texto += f"Categoria: {self.categoria_id}\n"
+        texto += f"Categoria: {self.categoria}\n"
         return texto
 
 
@@ -123,8 +123,8 @@ class Produto:
     def setEstoque(self, estoque):
         self.estoque = estoque
 
-    def setCategoria(self, categoria_id):
-        self.categoria_id = categoria_id
+    def setCategoria(self, categoria):
+        self.categoria = categoria
 
     # --------- GETTERS ---------
     def getId(self):
@@ -140,7 +140,7 @@ class Produto:
         return self.estoque
 
     def getCategoria(self):
-        return self.categoria_id
+        return self.categoria
     
     # ---------- JSON -----------
     def to_json(self):
@@ -149,7 +149,7 @@ class Produto:
             "descricao": self.descricao,
             "preco": self.preco,
             "estoque": self.estoque,
-            "categoria": self.categoria_id
+            "categoria": self.categoria
         }
     
     def from_json(dic):
@@ -317,8 +317,3 @@ class VendaItem:
             dic["preco"]
         )
     
-
-
-
-
-

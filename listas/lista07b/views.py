@@ -15,12 +15,9 @@ class View:
 
     @staticmethod
     def cliente_atualizar(id, nome, email, telefone):
-        try:
-            cliente = Cliente(id, nome, email, telefone)
-            ClienteDAO.atualizar(cliente)
-            return True
-        except:
-            return False
+        cliente = Cliente(id, nome, email, telefone)
+        ClienteDAO.atualizar(cliente)
+
 
     @staticmethod
     def cliente_excluir(id):
@@ -28,6 +25,8 @@ class View:
         cliente = Cliente(id, nome="", email="", telef="")
         ClienteDAO.excluir(cliente)
     
+
+
     # ===== CATEGORIAS =====
     @staticmethod
     def categoria_inserir(nome):
@@ -48,7 +47,9 @@ class View:
     def categoria_excluir(id):
         categoria = Categoria(id, nome="")
         CategoriaDAO.excluir(categoria)
-    
+
+
+
     # ===== PRODUTOS =====
     @staticmethod
     def produto_inserir(descricao, preco, estoque, categoria_id):
@@ -61,11 +62,19 @@ class View:
         return produtos
         
     @staticmethod
-    def atualizar_produto(id, descricao, preco, estoque, categoria_id):
+    def produto_atualizar(id, descricao, preco, estoque, categoria_id):
         produto = Produto(id, descricao, preco, estoque, categoria_id)
         ProdutoDAO.atualizar(produto)
 
     @staticmethod
-    def excluir_produto(id):
-        produto = Produto(id, descricao="", preco=0.0, estoque=0, categoria=None)
+    def produto_excluir(id):
+        produto = Produto(id, descricao="", preco=0.0, estoque=0, categoria_id=1)
         ProdutoDAO.excluir(produto)
+    
+    @staticmethod
+    def produto_reajustar(percentual):
+        produtos = View.produto_listar()
+        for p in produtos:
+            valor_reajustado = p.getPreco() * (1 + (percentual/100))
+            View.produto_atualizar(p.getId(), p.getDescricao(), valor_reajustado, p.getEstoque(), p.getCategoria())
+

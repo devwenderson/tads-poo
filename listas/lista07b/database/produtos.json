@@ -1,0 +1,9 @@
+[
+    {
+        "id": 2,
+        "descricao": "Mouse",
+        "preco": 25.0,
+        "estoque": 123,
+        "categoria": 1
+    }
+]
