@@ -87,7 +87,7 @@ class UI:
         if op == 1: UI.cliente_listar_produtos()
         elif op == 2: UI.cliente_inserir_produto_carrinho()
         elif op == 3: UI.cliente_visualizar_carrinho()
-        elif op == 4: pass
+        elif op == 4: UI.cliente_comprar_carrinho()
         elif op == 5: pass
         elif op == 9: UI.usuario_sair()
     
@@ -169,7 +169,7 @@ class UI:
             _carrinho = carrinho["carrinho"]
             cliente = _carrinho.getCliente()
             data = _carrinho.getData().strftime('%d/%m/%Y')
-            dados = f"Cliente: {cliente} - Criação do carrinho: {data}"
+            dados = f"Carrinho: Cliente: {cliente} - Criação do carrinho: {data}"
             print("-"*65)
             print(f"{dados:^65}")
             print("-"*65)
@@ -190,6 +190,18 @@ class UI:
             print("-"*65)
         else: 
             print("\n===== Carrinho vazio =====\n")
+    
+    @classmethod
+    def cliente_comprar_carrinho(cls):
+        
+        UI.cliente_visualizar_carrinho()
+        
+        comprar = bool(int(input("Deseja comprar? 1 - Sim | 0 - Não: ")))
+        dados = View.carrinho_comprar(cls.__usuario["id"], comprar=comprar)
+        
+        if (dados["status"]):
+            print("\n======== COMPRA REALIZADA COM SUCESSO ========\n")
+        
     
     """ 
     ==========================

@@ -146,7 +146,13 @@ class Produto:
         }
     
     def from_json(dic):
-        return Produto(dic["id"], dic["descricao"], dic["preco"], dic["estoque"], dic["categoria"])
+        return Produto(
+            id=dic["id"], 
+            descricao=dic["descricao"], 
+            preco=dic["preco"], 
+            estoque=dic["estoque"], 
+            categoria_id=dic["categoria"]
+        )
 
 class Venda:
 

@@ -126,7 +126,7 @@ class View:
     
     
     # ==== VENDAS =====
-    def vendas_listar(is_carrinho=False):
+    def vendas_listar(is_carrinho=False, cliente_id=None):
         vendas = VendaDAO.listar(is_carrinho=is_carrinho)
         return vendas
     
@@ -174,6 +174,31 @@ class View:
             for item in itens:
                 if item.getVenda() != carrinho.getId():
                     itens.remove(item)
+        
+        return {
+            "carrinho": carrinho,
+            "itens": itens
+        }
+    
+    def carrinho_comprar(cliente_id, comprar=False):
+        carrinho = View.vendas_listar(is_carrinho=True, cliente_id=cliente_id)[0]
+        itens = VendaItemDAO.listar(venda=carrinho)
+        produtos = View.produto_listar()
+        
+        for i in itens:
+            for p in produtos:
+                if i.getProduto() == p.getId():
+                    estoque_atual = p.getEstoque()
+                    qtd_comprada = i.getQtd()
+                    p.setEstoque(estoque_atual-qtd_comprada)
+                    ProdutoDAO.atualizar(p)
+        
+        if comprar:
+            carrinho.setCarrinho(False)
+            VendaDAO.atualizar(carrinho)
+            return {
+                "status": True
+            }
         
         return {
             "carrinho": carrinho,

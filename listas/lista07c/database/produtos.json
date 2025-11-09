@@ -1,12 +1,5 @@
 [
     {
-        "id": 2,
-        "descricao": "Mouse simples de escrit\u00f3rio gamer",
-        "preco": 60.0,
-        "estoque": 150,
-        "categoria": 1
-    },
-    {
         "id": 3,
         "descricao": "Monitor",
         "preco": 390.0,
@@ -17,7 +10,14 @@
         "id": 4,
         "descricao": "Notebook",
         "preco": 3999.0,
-        "estoque": 120,
+        "estoque": 110,
+        "categoria": 1
+    },
+    {
+        "id": 2,
+        "descricao": "Mouse simples de escrit\u00f3rio gamer",
+        "preco": 60.0,
+        "estoque": 130,
         "categoria": 1
     }
 ]

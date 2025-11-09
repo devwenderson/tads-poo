@@ -209,18 +209,23 @@ class VendaDAO:
         cls.salvar()
 
     @classmethod
-    def listar(cls, is_carrinho=False):
+    def listar(cls, is_carrinho=True, cliente_id=None):
         """
         is_carrinho: False -> Retorna vendas que não são carrinhos
         is_carrinho: True -> Retorna vendas que são carrinhos
         """
         cls.abrir()
         if (is_carrinho):
+            if cliente_id != None:
+                for c in cls.objetos:
+                    if c.getCliente() != cliente_id:
+                        cls.objetos.remove(c)
             return cls.objetos
         else:  
             for c in cls.objetos:
                 if c.getCarrinho() != is_carrinho: 
                     cls.objetos.remove(c)
+            return cls.objetos
 
     @classmethod
     def busca_obj(cls, id):
@@ -279,9 +284,15 @@ class VendaItemDAO:
         cls.salvar()
 
     @classmethod
-    def listar(cls):
+    def listar(cls, venda=None):
         cls.abrir()
-        return cls.objetos
+        if (venda != None):
+            for i in cls.objetos:
+                if i.getVenda() != venda.getId(): 
+                    cls.objetos.remove(i)
+            return cls.objetos
+        else:
+            return cls.objetos
 
     @classmethod
     def busca_obj(cls, id):
