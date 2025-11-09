@@ -40,5 +40,12 @@
         "produto_id": 4,
         "preco": 3999.0,
         "qtd": 1
+    },
+    {
+        "id": 7,
+        "venda_id": 4,
+        "produto_id": 1,
+        "preco": 120.0,
+        "qtd": 5
     }
 ]

@@ -225,7 +225,7 @@ class VendaDAO:
             if (cliente_id != None):
                 return [i for i in cls.objetos if i.getCliente() == cliente_id]
             else:  
-                return cls.objetos
+                return [i for i in cls.objetos if i.getCarrinho() is not True]
 
     @classmethod
     def busca_obj(cls, id):

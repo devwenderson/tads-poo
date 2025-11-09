@@ -1,5 +1,12 @@
 [
     {
+        "id": 1,
+        "descricao": "Teclado",
+        "preco": 120.0,
+        "estoque": 148,
+        "categoria": 1
+    },
+    {
         "id": 2,
         "descricao": "Mouse simples de escrit\u00f3rio gamer",
         "preco": 60.0,

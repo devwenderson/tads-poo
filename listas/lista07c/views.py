@@ -2,8 +2,7 @@ from models import Cliente, Categoria, Produto, Venda, VendaItem
 from dao_classes import ClienteDAO, CategoriaDAO, ProdutoDAO, VendaDAO, VendaItemDAO
 from utils import verifica_valor
 
-class View:
-    
+class View:    
     def autenticar(email, senha):
         clientes = View.cliente_listar()
         for c in clientes:
@@ -48,7 +47,6 @@ class View:
         cliente = Cliente(id, nome, email, telefone)
         ClienteDAO.atualizar(cliente)
 
-
     @staticmethod
     def cliente_excluir(id):
         id = int(id)
@@ -72,11 +70,8 @@ class View:
     @staticmethod
     def categoria_atualizar(id, nome):
         id = int(id)
-
         antiga_categ = CategoriaDAO.busca_obj(id)
-
         nome = verifica_valor(antiga_categ.getNome(), nome, str)
-
         categoria = Categoria(id, nome)
         CategoriaDAO.atualizar(categoria)
 
@@ -128,7 +123,12 @@ class View:
     # ==== VENDAS =====
     def vendas_listar(is_carrinho=False, cliente_id=None):
         vendas = VendaDAO.listar(is_carrinho=is_carrinho, cliente_id=cliente_id)
-        return vendas
+        itens = VendaItemDAO.listar()
+        
+        return {
+            "vendas": vendas,
+            "itens": itens
+        }
     
     def vendas_inserir(data, carrinho, cliente_id, produto_id):
         venda = Venda(0, data, carrinho, cliente_id)
@@ -165,7 +165,7 @@ class View:
     
     def carrinho_visualizar(cliente_id):
         carrinho = None
-        for v in View.vendas_listar(is_carrinho=True, cliente_id=cliente_id):
+        for v in View.vendas_listar(is_carrinho=True, cliente_id=cliente_id)["vendas"]:
             if (v.getCarrinho() == True and v.getCliente()==cliente_id): 
                 carrinho = v
         

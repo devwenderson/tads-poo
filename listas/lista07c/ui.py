@@ -125,6 +125,58 @@ class UI:
     """
     
     @staticmethod
+    def carrinho_layout(dic):
+        _carrinho = dic["carrinho"]
+        cliente = _carrinho.getCliente()
+        data = _carrinho.getData().strftime('%d/%m/%Y')
+        
+        dados = f"Carrinho: Cliente: {cliente} - Criação do carrinho: {data}"
+        print("-"*65)
+        print(f"{dados:^65}")
+        print("-"*65)
+        print(f"{'Produto':<15} | {'Quantidade':^12} | {'Preço':<15} | {'Subtotal':<15}")
+        print("-"*65)
+        
+        preco_total = 0
+        for i in dic["itens"]:
+            produto = i.getProduto()
+            qtd = i.getQtd() 
+            preco = i.getPreco()
+            subtotal = preco * qtd
+            preco_total += subtotal
+            print(f"{produto:<15} | {qtd:^12} | R${preco:>13.2f} | R${subtotal:>10.2f}")
+            
+        print("-"*65)
+        print(f"Preço total: {'R$ ':>44}{preco_total:0.2f}")
+        print("-"*65)
+        
+    @staticmethod
+    def venda_layout(dic):
+        for v in dic["vendas"]:
+            venda_id = v.getId()
+            data = v.getData().strftime("%d/%m/%Y")
+            cliente = v.getCliente()
+            dados = f"Venda: {venda_id} | Data: {data} | Cliente: {cliente}"
+            preco_total = 0
+            print(f"\n{'-'*65}")
+            print(f"{dados:^65}")
+            print("-"*65)
+            print(f"{'Produto':<15} | {'Quantidade':^12} | {'Preço':<15} | {'Subtotal':<15}")
+            print("-"*65)
+            for i in dic["itens"]:
+                if (v.getId()==i.getVenda()):
+                    produto = i.getProduto()
+                    qtd = i.getQtd() 
+                    preco = i.getPreco()
+                    subtotal = preco * qtd
+                    preco_total += subtotal
+                    print(f"{produto:<15} | {qtd:^12} | R${preco:>13.2f} | R${subtotal:>10.2f}")
+            
+            print("-"*65)
+            print(f"Preço total: {'R$ ':>44}{preco_total:0.2f}")
+            print(f"{'-'*65}\n")
+    
+    @staticmethod
     def cliente_listar_produtos():
         UI.produto_listar()
 
@@ -166,29 +218,7 @@ class UI:
             cliente_id=cls.__usuario["id"]
         )
         if carrinho["carrinho"] != None: 
-            _carrinho = carrinho["carrinho"]
-            cliente = _carrinho.getCliente()
-            data = _carrinho.getData().strftime('%d/%m/%Y')
-            
-            dados = f"Carrinho: Cliente: {cliente} - Criação do carrinho: {data}"
-            print("-"*65)
-            print(f"{dados:^65}")
-            print("-"*65)
-            print(f"{'Produto':<15} | {'Quantidade':^12} | {'Preço':<15} | {'Subtotal':<15}")
-            print("-"*65)
-            
-            preco_total = 0
-            for i in carrinho["itens"]:
-                produto = i.getProduto()
-                qtd = i.getQtd() 
-                preco = i.getPreco()
-                subtotal = preco * qtd
-                preco_total += subtotal
-                print(f"{produto:<15} | {qtd:^12} | R${preco:>13.2f} | R${subtotal:>10.2f}")
-                
-            print("-"*65)
-            print(f"Preço total: {'R$ ':>44}{preco_total:0.2f}")
-            print("-"*65)
+            UI.carrinho_layout(carrinho)
         else: 
             print("\n===== Carrinho vazio =====\n")
     
@@ -207,8 +237,7 @@ class UI:
     def cliente_listar_venda(cls):
         vendas = View.vendas_listar(is_carrinho=False, cliente_id=cls.__usuario["id"])
         
-        for v in vendas:
-            print(v)
+        UI.venda_layout(vendas)
     
     """ 
     ==========================
@@ -354,14 +383,16 @@ class UI:
     
     
     # ===== VENDAS =====
+    
+    @staticmethod
     def venda_listar():
         print("\n----- LISTAR VENDAS -----\n")
-        vendas = View.vendas_listar()
-        if vendas != None:
-            for v in vendas:
-                print(v)
-        else:
-            print("Não há vendas")
+        vendas = View.vendas_listar(is_carrinho=False)
+        if (len(vendas["vendas"]) > 0):
+            UI.venda_layout(vendas)
+                        
+            
+        
         
         
 

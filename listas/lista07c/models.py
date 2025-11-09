@@ -226,6 +226,7 @@ class VendaItem:
     def __str__(self):
         texto = ""
         texto += f"ID: {self.id:03d}\n"
+        texto += f"Venda: {self.venda_id}\n"
         texto += f"Produto: {self.produto_id}\n"
         texto += f"Quantidade: {self.qtd}\n"
         texto += f"Preço Unitário: R$ {self.preco:0.2f}\n"
