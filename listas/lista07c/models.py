@@ -283,9 +283,3 @@ class VendaItem:
             produto_id=dic["produto_id"],
             preco=dic["preco"]
         )
-    
-
-
-
-
-

@@ -124,10 +124,12 @@ class View:
     def vendas_listar(is_carrinho=False, cliente_id=None):
         vendas = VendaDAO.listar(is_carrinho=is_carrinho, cliente_id=cliente_id)
         itens = VendaItemDAO.listar()
+        produtos = ProdutoDAO.listar()
         
         return {
             "vendas": vendas,
-            "itens": itens
+            "itens": itens,
+            "produtos": produtos
         }
     
     def vendas_inserir(data, carrinho, cliente_id, produto_id):
@@ -173,9 +175,12 @@ class View:
         if carrinho != None:
             itens = VendaItemDAO.listar(carrinho)
         
+        produtos = ProdutoDAO.listar()
+        
         return {
             "carrinho": carrinho,
-            "itens": itens
+            "itens": itens,
+            "produtos": produtos
         }
     
     def carrinho_comprar(cliente_id, comprar=False):
@@ -202,6 +207,3 @@ class View:
             "carrinho": carrinho,
             "itens": itens
         }
-        
-
-

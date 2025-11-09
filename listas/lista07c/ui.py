@@ -139,7 +139,10 @@ class UI:
         
         preco_total = 0
         for i in dic["itens"]:
-            produto = i.getProduto()
+            produto = ""
+            for p in dic["produtos"]:
+                if (p.getId() == i.getProduto()):
+                    produto = p.getDescricao()
             qtd = i.getQtd() 
             preco = i.getPreco()
             subtotal = preco * qtd
@@ -165,7 +168,10 @@ class UI:
             print("-"*65)
             for i in dic["itens"]:
                 if (v.getId()==i.getVenda()):
-                    produto = i.getProduto()
+                    produto = ""
+                    for p in dic["produtos"]:
+                        if p.getId() == i.getProduto():
+                            produto = p.getDescricao()
                     qtd = i.getQtd() 
                     preco = i.getPreco()
                     subtotal = preco * qtd
@@ -383,18 +389,11 @@ class UI:
     
     
     # ===== VENDAS =====
-    
     @staticmethod
     def venda_listar():
         print("\n----- LISTAR VENDAS -----\n")
         vendas = View.vendas_listar(is_carrinho=False)
         if (len(vendas["vendas"]) > 0):
             UI.venda_layout(vendas)
-                        
-            
-        
-        
-        
-
 
 UI.main()
