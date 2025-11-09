@@ -5,5 +5,19 @@
         "preco": 60.0,
         "estoque": 150,
         "categoria": 1
+    },
+    {
+        "id": 3,
+        "descricao": "Monitor",
+        "preco": 390.0,
+        "estoque": 500,
+        "categoria": 2
+    },
+    {
+        "id": 4,
+        "descricao": "Notebook",
+        "preco": 3999.0,
+        "estoque": 120,
+        "categoria": 1
     }
 ]

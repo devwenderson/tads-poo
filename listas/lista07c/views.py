@@ -126,7 +126,59 @@ class View:
     
     
     # ==== VENDAS =====
-    def vendas_listar():
-        vendas = VendaDAO.listar()
+    def vendas_listar(is_carrinho=False):
+        vendas = VendaDAO.listar(is_carrinho=is_carrinho)
         return vendas
+    
+    def vendas_inserir(data, carrinho, cliente_id, produto_id):
+        venda = Venda(0, data, carrinho, cliente_id)
+        venda.setProdutos(produto_id)
+        VendaDAO.inserir(venda)
+    
+    def carrinho_inserir(data, carrinho, cliente_id, produto_id, qtd):
+        carrinhos = VendaDAO.listar(is_carrinho=True)
+        produto_preco = ProdutoDAO.busca_obj(produto_id).getPreco()
+        
+        for car in carrinhos:
+            if car.getCliente() == cliente_id:                
+                item = VendaItem(
+                    id=0,
+                    qtd=qtd,
+                    venda_id=car.getId(),
+                    produto_id=produto_id,
+                    preco=produto_preco
+                )
+                VendaItemDAO.inserir(item)                
+                return True
+                
+        carrinho = Venda(0, data, carrinho, cliente_id)
+        VendaDAO.inserir(carrinho)
+        item = VendaItem(
+            id=0,
+            qtd=qtd,
+            venda_id=carrinho.getId(),
+            produto_id=produto_id,
+            preco=produto_preco
+        )
+        VendaItemDAO.inserir(item)                
+        return True
+    
+    def carrinho_visualizar(cliente_id):
+        carrinho = None
+        for v in View.vendas_listar(is_carrinho=True):
+            if (v.getCarrinho() and v.getCliente()==cliente_id): 
+                carrinho = v
+        itens = None
+        if carrinho != None:
+            itens = VendaItemDAO.listar()
+            for item in itens:
+                if item.getVenda() != carrinho.getId():
+                    itens.remove(item)
+        
+        return {
+            "carrinho": carrinho,
+            "itens": itens
+        }
+        
+
 

@@ -9,8 +9,15 @@
     {
         "id": 2,
         "nome": "Wenderson",
-        "email": "wenderson@email.com",
-        "senha": "wenderson",
+        "email": "w",
+        "senha": "w",
         "telefone": "1"
+    },
+    {
+        "id": 3,
+        "nome": "e",
+        "email": "e",
+        "senha": "e",
+        "telefone": "e"
     }
 ]

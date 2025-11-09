@@ -1,11 +1,6 @@
 from datetime import datetime
 
 class Cliente:
-    id = int
-    nome = str
-    email = str
-    telefone = str
-
     def __init__(self, id: int, nome: str, email: str, senha: str, telef: str):
         self.setId(id)
         self.setNome(nome)
@@ -61,8 +56,6 @@ class Cliente:
         return Cliente(dic["id"], dic["nome"], dic["email"], dic["senha"], dic["telefone"])
 
 class Categoria:
-    id = int
-    nome = str
 
     def __init__(self, id, nome):
         self.setId(id)
@@ -92,14 +85,7 @@ class Categoria:
     def from_json(dic):
         return Categoria(dic["id"], dic["nome"])
 
-
 class Produto:
-    id = int
-    descricao = str
-    preco = float
-    estoque = int
-    categoria_id = int
-
     def __init__(self, id: int, descricao: str, preco: float, estoque: int, categoria_id: int):
         self.setId(id)
         self.setDescricao(descricao)
@@ -163,30 +149,19 @@ class Produto:
         return Produto(dic["id"], dic["descricao"], dic["preco"], dic["estoque"], dic["categoria"])
 
 class Venda:
-    id = int
-    data = datetime
-    carrinho = bool
-    cliente = int
-    produtos = [int]
 
     def __init__(self, id: int, data: datetime, carrinho: bool, cliente: int):
         self.setId(id)
         self.setData(data)
         self.setCarrinho(carrinho)
         self.setCliente(cliente)
-        self.produtos = []
     
     def __str__(self):
         texto = ""
         texto += f"ID: {self.id:03d}\n"
         texto += f"Data da venda: {self.data.strftime('%d/%m/%Y')}\n"
         texto += f"Carrinho: {self.carrinho}\n"
-        texto += f"Total: R$ {self.getTotal():0.2f}\n"
         texto += f"Cliente: {self.cliente}\n"
-        texto += "Produtos: \n"
-        for pro in self.produtos:
-            texto += f" - {pro}\n"
-
         return texto
 
     # --------- SETTERS ---------
@@ -201,9 +176,6 @@ class Venda:
 
     def setCliente(self, cliente):
         self.cliente = cliente
-    
-    def setProdutos(self, prod_id):
-        self.produtos.append(prod_id)
 
     # --------- GETTERS ---------
     def getId(self):
@@ -215,18 +187,9 @@ class Venda:
     def getCarrinho(self):
         return self.carrinho
 
-    def getTotal(self):
-        total = 0
-        for p in self.produtos:
-            total += 0 # Precisa atualizar
-        return total
-
     def getCliente(self):
         return self.cliente
 
-    def getProdutos(self):
-        return self.produtos
-    
     # ---------- JSON -----------
     def to_json(self):
         return {
@@ -234,29 +197,19 @@ class Venda:
             "data": self.data.strftime("%d/%m/%Y"),
             "carrinho": self.carrinho,
             "cliente": self.cliente,
-            "produtos": self.produtos
         }
     
     def from_json(dic):
         venda = Venda(
-            dic["id"],
-            datetime.strptime(dic["data"], "%d/%m/%Y"),
-            dic["carrinho"],
-            dic["cliente"]
+            id=dic["id"],
+            data=datetime.strptime(dic["data"], "%d/%m/%Y"),
+            carrinho=dic["carrinho"],
+            cliente=dic["cliente"]
         )
-
-        for pro in dic["produtos"]:
-            venda.setProdutos(pro)
         
         return venda
-
+    
 class VendaItem:
-    id = int
-    qtd = int
-    preco = float
-    venda_id = int
-    produto_id = int
-
     def __init__(self, id: int, qtd: int, venda_id: int, produto_id: int, preco: float):
         self.setId(id)
         self.setQtd(qtd)
@@ -317,11 +270,11 @@ class VendaItem:
 
     def from_json(dic):
         return VendaItem(
-            dic["id"],
-            dic["venda_id"],
-            dic["produto_id"],
-            dic["qtd"],
-            dic["preco"]
+            id=dic["id"],
+            qtd=dic["qtd"],
+            venda_id=dic["venda_id"],
+            produto_id=dic["produto_id"],
+            preco=dic["preco"]
         )
     
 

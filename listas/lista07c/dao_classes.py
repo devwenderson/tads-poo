@@ -209,9 +209,18 @@ class VendaDAO:
         cls.salvar()
 
     @classmethod
-    def listar(cls):
+    def listar(cls, is_carrinho=False):
+        """
+        is_carrinho: False -> Retorna vendas que não são carrinhos
+        is_carrinho: True -> Retorna vendas que são carrinhos
+        """
         cls.abrir()
-        return cls.objetos
+        if (is_carrinho):
+            return cls.objetos
+        else:  
+            for c in cls.objetos:
+                if c.getCarrinho() != is_carrinho: 
+                    cls.objetos.remove(c)
 
     @classmethod
     def busca_obj(cls, id):
@@ -299,7 +308,7 @@ class VendaItemDAO:
     @classmethod
     def salvar(cls):
         path = os.path.dirname(__file__)
-        with open(f"{path}/database/venda-tens.json", mode="w") as arquivo:
+        with open(f"{path}/database/venda-itens.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default=VendaItem.to_json, indent=4)
     
     @classmethod

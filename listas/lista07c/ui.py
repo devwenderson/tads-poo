@@ -1,6 +1,7 @@
 from models import Cliente, Categoria, Produto, Venda, VendaItem
 from dao_classes import ClienteDAO, CategoriaDAO, ProdutoDAO, VendaDAO, VendaItemDAO
 from views import View
+from datetime import datetime
 
 class UI:
     __usuario = None
@@ -55,18 +56,18 @@ class UI:
         print(opcoes)
         
         op = int(input("Informe uma opção: "))
-        if op == 1: UI.inserir_cliente()
-        elif op == 2: UI.listar_cliente()
-        elif op == 3: UI.atualizar_cliente()
-        elif op == 4: UI.excluir_cliente()
-        elif op == 5: UI.inserir_categoria()
-        elif op == 6: UI.listar_categoria()
-        elif op == 7: UI.atualizar_categoria()
-        elif op == 8: UI.excluir_categoria()
-        elif op == 9: UI.inserir_produto()
-        elif op == 10: UI.listar_produto()
-        elif op == 11: UI.atualizar_produto()
-        elif op == 12: UI.excluir_produto()
+        if op == 1: UI.cliente_inserir()
+        elif op == 2: UI.cliente_listar()
+        elif op == 3: UI.cliente_atualizar()
+        elif op == 4: UI.cliente_excluir()
+        elif op == 5: UI.categoria_inserir()
+        elif op == 6: UI.categoria_listar()
+        elif op == 7: UI.categoria_atualizar()
+        elif op == 8: UI.categoria_excluir()
+        elif op == 9: UI.produto_inserir()
+        elif op == 10: UI.produto_listar()
+        elif op == 11: UI.produto_atualizar()
+        elif op == 12: UI.produto_excluir()
         elif op == 13: UI.produto_reajustar()
         elif op == 14: UI.venda_listar()
         elif op == 15: UI.usuario_sair()
@@ -83,9 +84,9 @@ class UI:
         print(opcoes)
         
         op = int(input("Informe uma opção: "))
-        if op == 1: pass
-        elif op == 2: pass
-        elif op == 3: pass
+        if op == 1: UI.cliente_listar_produtos()
+        elif op == 2: UI.cliente_inserir_produto_carrinho()
+        elif op == 3: UI.cliente_visualizar_carrinho()
         elif op == 4: pass
         elif op == 5: pass
         elif op == 9: UI.usuario_sair()
@@ -117,6 +118,85 @@ class UI:
         View.criar_admin()
         UI.menu()
 
+    """
+    ===========================
+    ====== CLIENT'S AREA ======
+    ===========================
+    """
+    
+    @staticmethod
+    def cliente_listar_produtos():
+        UI.produto_listar()
+
+    @classmethod
+    def cliente_inserir_produto_carrinho(cls):
+        UI.produto_listar()
+        
+        carrinho = View.carrinho_visualizar(
+            cliente_id=cls.__usuario["id"]
+        )
+    
+        produto_id = int(input("Selecione o produto (id): "))
+        qtd = int(input("Quantidade: "))
+        
+        if carrinho["carrinho"] != None:
+            View.carrinho_inserir(
+                data="",
+                carrinho=True,
+                cliente_id=cls.__usuario["id"],
+                produto_id=produto_id,
+                qtd=qtd
+            )
+        else:
+            data = datetime.now()
+            carrinho = True
+            cliente_id = cls.__usuario["id"]
+            
+            View.carrinho_inserir(
+                data=data,
+                carrinho=carrinho,
+                cliente_id=cliente_id,
+                produto_id=produto_id,
+                qtd=qtd
+            )
+    
+    @classmethod
+    def cliente_visualizar_carrinho(cls):
+        carrinho = View.carrinho_visualizar(
+            cliente_id=cls.__usuario["id"]
+        )
+        if carrinho["carrinho"] != None: 
+            _carrinho = carrinho["carrinho"]
+            cliente = _carrinho.getCliente()
+            data = _carrinho.getData().strftime('%d/%m/%Y')
+            dados = f"Cliente: {cliente} - Criação do carrinho: {data}"
+            print("-"*65)
+            print(f"{dados:^65}")
+            print("-"*65)
+            print(f"{'Produto':<15} | {'Quantidade':^12} | {'Preço':<15} | {'Subtotal':<15}")
+            print("-"*65)
+            
+            preco_total = 0
+            for i in carrinho["itens"]:
+                produto = i.getProduto()
+                qtd = i.getQtd() 
+                preco = i.getPreco()
+                subtotal = preco * qtd
+                preco_total += subtotal
+                print(f"{produto:<15} | {qtd:^12} | R${preco:>13.2f} | R${subtotal:>10.2f}")
+                
+            print("-"*65)
+            print(f"Preço total: {'R$ ':>44}{preco_total:0.2f}")
+            print("-"*65)
+        else: 
+            print("\n===== Carrinho vazio =====\n")
+    
+    """ 
+    ==========================
+    ====== ADMIN'S AREA ======
+    ==========================
+    """
+
     # --------- Clientes ---------
     @staticmethod
     def cliente_inserir():
@@ -141,7 +221,7 @@ class UI:
     def cliente_atualizar():
         print("\n----- ATUALIZAR CLIENTE -----\n")
         try:
-            UI.listar_cliente()
+            UI.cliente_listar()
             
             print("Escolha o ID para atualizar")
             id = input("ID: ")
@@ -158,7 +238,7 @@ class UI:
     @staticmethod
     def cliente_excluir():
         print("\n----- EXCLUIR CLIENTE -----\n")
-        UI.listar_cliente()
+        UI.cliente_listar()
 
         print("Escolha o ID para excluir")
         id = int(input("ID: "))
@@ -175,7 +255,6 @@ class UI:
         View.categoria_inserir(nome)
         print("Categoria cadastrada com sucesso\n")
         
-
     @staticmethod
     def categoria_listar():
         print("\n----- LISTAR CATEGORIAS -----\n")
@@ -186,7 +265,7 @@ class UI:
     @staticmethod
     def categoria_atualizar():
         print("\n----- ATUALIZAR CATEGORIA -----\n")
-        UI.listar_categoria()
+        UI.categoria_listar()
         id = int(input("Insira o ID a ser atualizado: "))
         nome = input("Nome da categoria: ")
         View.categoria_atualizar(id, nome)
@@ -195,7 +274,7 @@ class UI:
     @staticmethod
     def categoria_excluir():
         print("\n----- EXCLUIR CATEGORIA -----\n")
-        UI.listar_categoria()
+        UI.categoria_listar()
         id = int(input("Insira o ID a ser excluído: "))
         View.categoria_excluir(id)
 
@@ -211,13 +290,12 @@ class UI:
         estoque = int(input("Quant. em estoque: "))
 
         print("\n----- CATEGORIAS -----\n")
-        UI.listar_categoria()
+        UI.categoria_listar()
         print("\n----- ---------- -----\n")
         categoria_id = int(input("Informe o id da categoria: "))
         View.produto_inserir(descricao, preco, estoque, categoria_id)
         print("\n----- PRODUTO CRIADO! -----\n")
-
-        
+       
     @staticmethod
     def produto_listar():
         print("\n----- LISTAR PRODUTOS -----\n")
@@ -228,7 +306,7 @@ class UI:
     @staticmethod
     def produto_atualizar():
         print("\n----- ATUALIZAR PRODUTO -----\n")
-        UI.listar_produto()
+        UI.produto_listar()
         id = input("Informe o ID a ser atualizado: ")
         descricao = input("Descrição do produto: ")
         preco = input("Preço: ")
@@ -244,7 +322,7 @@ class UI:
     @staticmethod
     def produto_excluir():
         print("\n----- EXCLUIR PRODUTO -----\n")
-        UI.listar_produto()
+        UI.produto_listar()
         id = int(input("Informe o ID a ser excluído: "))
         View.produto_excluir(id)
     
@@ -260,8 +338,11 @@ class UI:
     def venda_listar():
         print("\n----- LISTAR VENDAS -----\n")
         vendas = View.vendas_listar()
-        for v in vendas:
-            print(v)
+        if vendas != None:
+            for v in vendas:
+                print(v)
+        else:
+            print("Não há vendas")
         
         
 

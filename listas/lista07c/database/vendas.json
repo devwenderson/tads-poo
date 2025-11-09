@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "data": "08/11/2025",
+        "carrinho": true,
+        "cliente": 3
+    },
+    {
+        "id": 2,
+        "data": "08/11/2025",
+        "carrinho": true,
+        "cliente": 2
+    }
+]
