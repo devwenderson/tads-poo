@@ -211,21 +211,21 @@ class VendaDAO:
     @classmethod
     def listar(cls, is_carrinho=True, cliente_id=None):
         """
-        is_carrinho: False -> Retorna vendas que não são carrinhos
-        is_carrinho: True -> Retorna vendas que são carrinhos
+        is_carrinho: True -> Retorna carrinho
+        is_carrinho: False -> Retorna vendas
+        cliente_id: None -> Retorna todas as vendas
+        cliente_id: int -> Retorna vendas de um único cliente
         """
         cls.abrir()
         if (is_carrinho):
             if cliente_id != None:
-                for c in cls.objetos:
-                    if c.getCliente() != cliente_id:
-                        cls.objetos.remove(c)
+                return [i for i in cls.objetos if i.getCliente() == cliente_id]
             return cls.objetos
-        else:  
-            for c in cls.objetos:
-                if c.getCarrinho() != is_carrinho: 
-                    cls.objetos.remove(c)
-            return cls.objetos
+        else:
+            if (cliente_id != None):
+                return [i for i in cls.objetos if i.getCliente() == cliente_id]
+            else:  
+                return cls.objetos
 
     @classmethod
     def busca_obj(cls, id):
@@ -287,10 +287,7 @@ class VendaItemDAO:
     def listar(cls, venda=None):
         cls.abrir()
         if (venda != None):
-            for i in cls.objetos:
-                if i.getVenda() != venda.getId(): 
-                    cls.objetos.remove(i)
-            return cls.objetos
+            return [i for i in cls.objetos if venda.getId() == i.getVenda()]
         else:
             return cls.objetos
 
