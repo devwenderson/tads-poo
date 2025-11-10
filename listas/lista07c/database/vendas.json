@@ -20,7 +20,7 @@
     {
         "id": 4,
         "data": "09/11/2025",
-        "carrinho": true,
+        "carrinho": false,
         "cliente": 2
     }
 ]

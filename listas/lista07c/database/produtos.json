@@ -1,12 +1,5 @@
 [
     {
-        "id": 1,
-        "descricao": "Teclado",
-        "preco": 120.0,
-        "estoque": 148,
-        "categoria": 1
-    },
-    {
         "id": 2,
         "descricao": "Mouse simples de escrit\u00f3rio gamer",
         "preco": 60.0,
@@ -14,17 +7,24 @@
         "categoria": 1
     },
     {
+        "id": 1,
+        "descricao": "Teclado",
+        "preco": 120.0,
+        "estoque": 143,
+        "categoria": 1
+    },
+    {
         "id": 3,
         "descricao": "Monitor",
         "preco": 390.0,
-        "estoque": 498,
+        "estoque": 493,
         "categoria": 2
     },
     {
         "id": 4,
         "descricao": "Notebook",
         "preco": 3999.0,
-        "estoque": 99,
+        "estoque": 95,
         "categoria": 1
     }
 ]

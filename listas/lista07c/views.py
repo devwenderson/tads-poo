@@ -121,8 +121,8 @@ class View:
     
     
     # ==== VENDAS =====
-    def vendas_listar(is_carrinho=False, cliente_id=None):
-        vendas = VendaDAO.listar(is_carrinho=is_carrinho, cliente_id=cliente_id)
+    def vendas_listar(is_carrinho=False, carrinho_only=False, cliente_id=None):
+        vendas = VendaDAO.listar(is_carrinho=is_carrinho, carrinho_only=carrinho_only, cliente_id=cliente_id)
         itens = VendaItemDAO.listar()
         produtos = ProdutoDAO.listar()
         
@@ -184,7 +184,8 @@ class View:
         }
     
     def carrinho_comprar(cliente_id, comprar=False):
-        carrinho = View.vendas_listar(is_carrinho=True, cliente_id=cliente_id)[0]
+        carrinho = View.vendas_listar(is_carrinho=True, carrinho_only=True, cliente_id=cliente_id)["vendas"][0]
+        print(carrinho)
         itens = VendaItemDAO.listar(venda=carrinho)
         produtos = View.produto_listar()
         

@@ -209,14 +209,19 @@ class VendaDAO:
         cls.salvar()
 
     @classmethod
-    def listar(cls, is_carrinho=True, cliente_id=None):
+    def listar(cls, is_carrinho=True, carrinho_only=False, cliente_id=None):
         """
         is_carrinho: True -> Retorna carrinho
         is_carrinho: False -> Retorna vendas
         cliente_id: None -> Retorna todas as vendas
         cliente_id: int -> Retorna vendas de um único cliente
+        carrinho_only: True -> Retorna apenas carrrinho
+        carrinho_only: False -> Retorna tudo
         """
         cls.abrir()
+        if (carrinho_only):
+            return [i for i in cls.objetos if i.getCliente() == cliente_id and i.getCarrinho()]
+        
         if (is_carrinho):
             if cliente_id != None:
                 return [i for i in cls.objetos if i.getCliente() == cliente_id]
