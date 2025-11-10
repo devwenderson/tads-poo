@@ -14,11 +14,9 @@ class View:
         clientes = View.cliente_listar()
         if clientes:
             for c in clientes:
-                if c.getEmail() == "admin": return
-                View.cliente_inserir("admin", "admin", "admin", "1")
-        else:
+                if c.getEmail() == "admin": 
+                    return True
             View.cliente_inserir("admin", "admin", "admin", "1")
-            
     
     # =====================
     # ======  ADMIN  ======
@@ -185,7 +183,6 @@ class View:
     
     def carrinho_comprar(cliente_id, comprar=False):
         carrinho = View.vendas_listar(is_carrinho=True, carrinho_only=True, cliente_id=cliente_id)["vendas"][0]
-        print(carrinho)
         itens = VendaItemDAO.listar(venda=carrinho)
         produtos = View.produto_listar()
         
@@ -201,10 +198,13 @@ class View:
             carrinho.setCarrinho(False)
             VendaDAO.atualizar(carrinho)
             return {
+                "carrinho": None,
+                "itens": None,
                 "status": True
             }
         
         return {
             "carrinho": carrinho,
-            "itens": itens
+            "itens": itens,
+            "status": False
         }

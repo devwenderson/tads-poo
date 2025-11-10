@@ -1,5 +1,3 @@
-from models import Cliente, Categoria, Produto, Venda, VendaItem
-from dao_classes import ClienteDAO, CategoriaDAO, ProdutoDAO, VendaDAO, VendaItemDAO
 from views import View
 from datetime import datetime
 
@@ -105,7 +103,7 @@ class UI:
                 admin = cls.__usuario["nome"] == "admin"
                 print(f"\n{'='*30}")
                 print("Comércio eletrônico 2025")
-                print(f"Bem-vindo(a), {cls.__usuario["nome"]}")
+                print(f"Bem-vindo(a), {cls.__usuario['nome']}")
                 print(f"{'='*30}\n")
 
                 if admin: UI.menu_admin()
@@ -238,6 +236,8 @@ class UI:
         
         if (dados["status"]):
             print("\n======== COMPRA REALIZADA COM SUCESSO ========\n")
+        else:
+            pass
     
     @classmethod
     def cliente_listar_venda(cls):

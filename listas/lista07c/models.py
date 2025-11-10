@@ -56,7 +56,6 @@ class Cliente:
         return Cliente(dic["id"], dic["nome"], dic["email"], dic["senha"], dic["telefone"])
 
 class Categoria:
-
     def __init__(self, id, nome):
         self.setId(id)
         self.setNome(nome)
@@ -155,7 +154,6 @@ class Produto:
         )
 
 class Venda:
-
     def __init__(self, id: int, data: datetime, carrinho: bool, cliente: int):
         self.setId(id)
         self.setData(data)
