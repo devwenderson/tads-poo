@@ -110,12 +110,5 @@
         "produto_id": 2,
         "preco": 78.0,
         "qtd": 10
-    },
-    {
-        "id": 17,
-        "venda_id": 9,
-        "produto_id": 2,
-        "preco": 78.0,
-        "qtd": 1
     }
 ]

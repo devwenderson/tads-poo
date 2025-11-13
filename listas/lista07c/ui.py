@@ -78,6 +78,7 @@ class UI:
         opcoes += "3 - Visualizar carrinho\n"
         opcoes += "4 - Comprar do carrinho\n"
         opcoes += "5 - Listar minhas compras\n"
+        opcoes += "6 - Esvaziar carrinho\n"
         opcoes += "9 - Sair\n"
         print(opcoes)
         
@@ -87,6 +88,7 @@ class UI:
         elif op == 3: UI.cliente_visualizar_carrinho()
         elif op == 4: UI.cliente_comprar_carrinho()
         elif op == 5: UI.cliente_listar_venda()
+        elif op == 6: UI.cliente_esvaziar_carrinho()
         elif op == 9: UI.usuario_sair()
     
     @classmethod
@@ -129,11 +131,11 @@ class UI:
         data = _carrinho.getData().strftime('%d/%m/%Y')
         
         dados = f"Carrinho: Cliente: {cliente} - Criação do carrinho: {data}"
-        print("-"*65)
-        print(f"{dados:^65}")
-        print("-"*65)
-        print(f"{'Produto':<15} | {'Quantidade':^12} | {'Preço':<15} | {'Subtotal':<15}")
-        print("-"*65)
+        print("-"*85)
+        print(f"{dados:^85}")
+        print("-"*85)
+        print(f"{'Produto':<35} | {'Quantidade':^12} | {'Preço':<15} | {'Subtotal':<15}")
+        print("-"*85)
         
         preco_total = 0
         for i in dic["itens"]:
@@ -145,11 +147,11 @@ class UI:
             preco = i.getPreco()
             subtotal = preco * qtd
             preco_total += subtotal
-            print(f"{produto:<15} | {qtd:^12} | R${preco:>13.2f} | R${subtotal:>10.2f}")
+            print(f"{produto:<35} | {qtd:^12} | R${preco:>13.2f} | R${subtotal:>10.2f}")
             
-        print("-"*65)
-        print(f"Preço total: {'R$ ':>44}{preco_total:0.2f}")
-        print("-"*65)
+        print("-"*85)
+        print(f"Preço total: {'R$ ':>64}{preco_total:0.2f}")
+        print("-"*85)
         
     @staticmethod
     def venda_layout(dic):
@@ -225,6 +227,11 @@ class UI:
             UI.carrinho_layout(carrinho)
         else: 
             print("\n===== Carrinho vazio =====\n")
+        
+    @classmethod
+    def cliente_esvaziar_carrinho(cls):
+        View.carrinho_esvaziar(cls.__usuario["id"])
+        print("\n===== CARRINHO ESVAZIADO =====\n")
     
     @classmethod
     def cliente_comprar_carrinho(cls):
