@@ -304,7 +304,7 @@ class VendaItemDAO:
     
     @classmethod
     def atualizar(cls, obj):
-        aux = cls.busca_obj(obj.id)
+        aux = cls.busca_obj(obj.getId())
         # Substitui o objeto antigo pelo novo
         if aux != None:
             cls.objetos.remove(aux)
@@ -313,7 +313,7 @@ class VendaItemDAO:
 
     @classmethod
     def excluir(cls, obj):
-        aux = cls.busca_obj(obj.id)
+        aux = cls.busca_obj(obj.getId())
         if aux != None:
             cls.objetos.remove(aux)
         cls.salvar()

@@ -141,6 +141,14 @@ class View:
         
         for car in carrinhos:
             if car.getCliente() == cliente_id and car.getCarrinho() == True:                
+                
+                itens = VendaItemDAO.listar(car)
+                for it in itens:
+                    if (produto_id == it.getProduto()):
+                        it.setQtd(it.getQtd() + qtd) 
+                        VendaItemDAO.atualizar(it)
+                        return
+                        
                 item = VendaItem(
                     id=0,
                     qtd=qtd,
@@ -148,8 +156,9 @@ class View:
                     produto_id=produto_id,
                     preco=produto_preco
                 )
+
                 VendaItemDAO.inserir(item)                
-                return True
+                return 
                 
         carrinho = Venda(0, data, carrinho, cliente_id)
         VendaDAO.inserir(carrinho)
@@ -205,6 +214,15 @@ class View:
         
         return {
             "carrinho": carrinho,
-            "itens": itens,
+            "itens": itens ,
             "status": False
         }
+
+    # NOVA FUNCIONALIDADE
+    def carrinho_esvaziar(cliente_id):
+        carrinho_dados = View.carrinho_visualizar(cliente_id=cliente_id)
+        itens = carrinho_dados["itens"]
+        VendaDAO.excluir(carrinho_dados["carrinho"])
+
+        for it in itens:
+            VendaItemDAO.excluir(it)
