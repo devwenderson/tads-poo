@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "venda_id": 1,
+        "produto_id": 2,
+        "preco": 60.0,
+        "qtd": 11
+    },
+    {
+        "id": 2,
+        "venda_id": 1,
+        "produto_id": 4,
+        "preco": 3999.0,
+        "qtd": 1
+    },
+    {
+        "id": 3,
+        "venda_id": 2,
+        "produto_id": 2,
+        "preco": 60.0,
+        "qtd": 1
+    },
+    {
+        "id": 4,
+        "venda_id": 2,
+        "produto_id": 3,
+        "preco": 390.0,
+        "qtd": 1
+    },
+    {
+        "id": 5,
+        "venda_id": 2,
+        "produto_id": 4,
+        "preco": 3999.0,
+        "qtd": 5
+    },
+    {
+        "id": 6,
+        "venda_id": 3,
+        "produto_id": 4,
+        "preco": 3999.0,
+        "qtd": 1
+    },
+    {
+        "id": 7,
+        "venda_id": 4,
+        "produto_id": 1,
+        "preco": 120.0,
+        "qtd": 5
+    },
+    {
+        "id": 8,
+        "venda_id": 4,
+        "produto_id": 3,
+        "preco": 390.0,
+        "qtd": 5
+    },
+    {
+        "id": 9,
+        "venda_id": 4,
+        "produto_id": 4,
+        "preco": 3999.0,
+        "qtd": 4
+    },
+    {
+        "id": 10,
+        "venda_id": 1,
+        "produto_id": 4,
+        "preco": 3999.0,
+        "qtd": 1
+    },
+    {
+        "id": 11,
+        "venda_id": 5,
+        "produto_id": 4,
+        "preco": 3999.0,
+        "qtd": 1
+    },
+    {
+        "id": 12,
+        "venda_id": 6,
+        "produto_id": 4,
+        "preco": 3999.0,
+        "qtd": 5
+    },
+    {
+        "id": 13,
+        "venda_id": 6,
+        "produto_id": 4,
+        "preco": 3999.0,
+        "qtd": 5
+    },
+    {
+        "id": 14,
+        "venda_id": 7,
+        "produto_id": 4,
+        "preco": 5198.7,
+        "qtd": -1
+    },
+    {
+        "id": 15,
+        "venda_id": 8,
+        "produto_id": 2,
+        "preco": 78.0,
+        "qtd": 7
+    },
+    {
+        "id": 16,
+        "venda_id": 7,
+        "produto_id": 2,
+        "preco": 78.0,
+        "qtd": 10
+    }
+]
