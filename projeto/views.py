@@ -52,8 +52,6 @@ class View:
         cliente = Cliente(id, nome="", email="", telef="")
         ClienteDAO.excluir(cliente)
     
-
-
     # ===== CATEGORIAS =====
     @staticmethod
     def categoria_inserir(nome):
