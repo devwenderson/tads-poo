@@ -1,12 +1,5 @@
 [
     {
-        "id": 2,
-        "nome": "admin",
-        "email": "admin",
-        "senha": "admin",
-        "telefone": "1"
-    },
-    {
         "id": 3,
         "nome": "Wenderson \u00c1lvares Cabral",
         "email": "wend.cabral@gmail.com",
@@ -33,5 +26,12 @@
         "email": "pedrinho@gmail.com",
         "senha": "12345",
         "telefone": "1234"
+    },
+    {
+        "id": 2,
+        "nome": "admin",
+        "email": "admin",
+        "senha": "1",
+        "telefone": "admin"
     }
 ]

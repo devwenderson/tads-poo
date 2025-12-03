@@ -1,12 +1,5 @@
 [
     {
-        "id": 1,
-        "descricao": "Teclado",
-        "preco": 156.0,
-        "estoque": 143,
-        "categoria": 1
-    },
-    {
         "id": 3,
         "descricao": "Monitor",
         "preco": 507.0,
@@ -26,5 +19,19 @@
         "preco": 78.0,
         "estoque": 103,
         "categoria": 1
+    },
+    {
+        "id": 5,
+        "descricao": "Batedeira",
+        "preco": 450.99,
+        "estoque": 120,
+        "categoria": 3
+    },
+    {
+        "id": 1,
+        "descricao": "Teclado",
+        "preco": 160.0,
+        "estoque": 150,
+        "categoria": 2
     }
 ]

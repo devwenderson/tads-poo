@@ -35,7 +35,7 @@ class IndexUI:
         op = st.sidebar.selectbox("Menu", [
             "Cadastro de clientes",
             "Cadastro de categorias",
-            "Cadastro de Produtos",
+            "Cadastro de produtos",
             "Reajustar produtos",
             "Sair"
         ])
