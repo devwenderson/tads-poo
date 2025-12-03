@@ -1,12 +1,5 @@
 [
     {
-        "id": 1,
-        "nome": "Wenderson \u00c1lvares Cabral",
-        "email": "wend.cabral@gmail.com",
-        "senha": "1234",
-        "telefone": ""
-    },
-    {
         "id": 2,
         "nome": "admin",
         "email": "admin",
@@ -21,13 +14,6 @@
         "telefone": ""
     },
     {
-        "id": 4,
-        "nome": "Wenderson \u00c1lvares Cabral",
-        "email": "wend.cabral@gmail.com",
-        "senha": "1234",
-        "telefone": "1234"
-    },
-    {
         "id": 5,
         "nome": "Wenderson \u00c1lvares Cabral",
         "email": "wend.cabral@gmail.com",
@@ -39,6 +25,13 @@
         "nome": "Wenderson \u00c1lvares Cabral",
         "email": "wend@gmail.com",
         "senha": "1234",
+        "telefone": "1234"
+    },
+    {
+        "id": 4,
+        "nome": "Pedrinho",
+        "email": "pedrinho@gmail.com",
+        "senha": "12345",
         "telefone": "1234"
     }
 ]

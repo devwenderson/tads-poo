@@ -47,7 +47,30 @@ class ManterClienteUI:
             st.rerun()
 
     def atualizar():
-        st.subheader("Atualizar")
+        clientes = View.cliente_listar()
+        if (len(clientes) == 0): 
+            st.write("Nenhum cliente cadastrado")
+        op = st.selectbox("Atualização do cliente", clientes)
+        nome = st.text_input("Novo nome", op.getNome())
+        email = st.text_input("Novo email", op.getEmail())
+        senha = st.text_input("Nova senha", op.getSenha())
+        telefone = st.text_input("Novo telefone", op.getTelefone())
+
+        if st.button("Atualizar"):
+            cli_id = op.getId()
+            View.cliente_atualizar(cli_id, nome, email, telefone, senha)
+            st.success("Cliente atualizado com sucesso")
+            time.sleep(2)
+            st.rerun()
+                
 
     def excluir():
-        st.subheader("Excluir")
+        clientes = View.cliente_listar()
+        op = st.selectbox("Excluir cliente", clientes)
+
+        if st.button("Excluir"):
+            cli_id = op.getId()
+            View.cliente_excluir(cli_id)
+            st.success("Cliente excluído com sucesso")
+            time.sleep(2)
+            st.rerun()
