@@ -14,6 +14,7 @@ class ManterProdutoUI:
         with tab4: ManterProdutoUI.excluir()
     
     def listar():
+        st.subheader("Produtos")
         produtos = View.produto_listar()
 
         if (len(produtos) == 0):
@@ -39,7 +40,8 @@ class ManterProdutoUI:
             df = pd.DataFrame(prod_list_dict)
             st.dataframe(df, hide_index=True, column_order=["id", "descricao", "preco", "estoque", "categoria"])
     
-    def cadastrar():             
+    def cadastrar():       
+        st.subheader("Cadastrar produto")      
         categorias = View.categoria_listar()
         descricao = st.text_input("Nome")
         preco = st.number_input("Preco")
@@ -82,4 +84,13 @@ class ManterProdutoUI:
                 
 
     def excluir():
-        pass
+        produtos = View.produto_listar()
+
+        op = st.selectbox("Excluir produtos", produtos)
+        if st.button("Excluir"):
+            prod_id = op.getId()
+            
+            View.produto_excluir(prod_id)
+            st.success("Produto excluído com sucesso")
+            time.sleep(2)
+            st.rerun()
