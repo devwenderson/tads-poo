@@ -113,16 +113,44 @@
     },
     {
         "id": 17,
-        "venda_id": 10,
+        "venda_id": 9,
         "produto_id": 3,
         "preco": 507.0,
         "qtd": 1
     },
     {
         "id": 18,
+        "venda_id": 9,
+        "produto_id": 2,
+        "preco": 78.0,
+        "qtd": 1
+    },
+    {
+        "id": 19,
         "venda_id": 10,
         "produto_id": 1,
         "preco": 160.0,
-        "qtd": 4
+        "qtd": 5
+    },
+    {
+        "id": 20,
+        "venda_id": 11,
+        "produto_id": 2,
+        "preco": 78.0,
+        "qtd": 43
+    },
+    {
+        "id": 21,
+        "venda_id": 11,
+        "produto_id": 3,
+        "preco": 507.0,
+        "qtd": 2
+    },
+    {
+        "id": 22,
+        "venda_id": 11,
+        "produto_id": 1,
+        "preco": 160.0,
+        "qtd": 1
     }
 ]

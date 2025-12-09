@@ -1,23 +1,23 @@
 [
     {
-        "id": 3,
-        "descricao": "Monitor",
-        "preco": 507.0,
-        "estoque": 493,
-        "categoria": 2
-    },
-    {
         "id": 2,
         "descricao": "Mouse simples de escrit\u00f3rio gamer",
         "preco": 78.0,
-        "estoque": 103,
+        "estoque": 59,
         "categoria": 1
+    },
+    {
+        "id": 3,
+        "descricao": "Monitor",
+        "preco": 507.0,
+        "estoque": 490,
+        "categoria": 2
     },
     {
         "id": 1,
         "descricao": "Teclado",
         "preco": 160.0,
-        "estoque": 150,
+        "estoque": 144,
         "categoria": 2
     }
 ]
