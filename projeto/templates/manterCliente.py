@@ -41,9 +41,7 @@ class ManterClienteUI:
                 time.sleep(2)
                 st.rerun()
             except ValueError as e:
-                st.warning(f"{e}")
-                time.sleep(2)
-                st.rerun()
+                st.warning(e)
             
             
 

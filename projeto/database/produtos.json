@@ -19,5 +19,12 @@
         "preco": 160.0,
         "estoque": 144,
         "categoria": 2
+    },
+    {
+        "id": 4,
+        "descricao": "Monitor ProMax COD 180Hz",
+        "preco": 1.0,
+        "estoque": 90,
+        "categoria": 1
     }
 ]

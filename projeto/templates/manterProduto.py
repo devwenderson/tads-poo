@@ -55,10 +55,13 @@ class ManterProdutoUI:
                     time.sleep(2)
                     st.rerun()
             
-            View.produto_inserir(descricao, preco, estoque, categoria.getId())
-            st.success("Produto cadastrado com sucesso")
-            time.sleep(2)
-            st.rerun()
+            try:
+                View.produto_inserir(descricao, preco, estoque, categoria.getId())
+                st.success("Produto cadastrado com sucesso")
+                time.sleep(2)
+                st.rerun()
+            except ValueError as e:
+                st.warning(e)
 
     def atualizar():
         produtos = View.produto_listar()
@@ -77,10 +80,14 @@ class ManterProdutoUI:
             cat_id = categoria.getId()
             if categoria == None:
                 cat_id = op.getCategoria()
-            View.produto_atualizar(pro_id, descricao, preco, estoque, cat_id)
-            st.success("Cliente atualizado com sucesso")
-            time.sleep(2)
-            st.rerun()
+            
+            try:
+                View.produto_atualizar(pro_id, descricao, preco, estoque, cat_id)
+                st.success("Produto atualizado com sucesso")
+                time.sleep(2)
+                st.rerun()
+            except ValueError as e:
+                st.warning(e)
                 
 
     def excluir():

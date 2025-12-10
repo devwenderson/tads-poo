@@ -16,7 +16,7 @@ class View:
             for c in clientes:
                 if c.getEmail() == "admin": 
                     return True
-            View.cliente_inserir("admin", "admin", "admin", "1")
+            View.cliente_inserir("admin", "admin", "admin", "(84) 91111-1111")
     
     # =====================
     # ======  ADMIN  ======
@@ -86,6 +86,11 @@ class View:
     # ===== PRODUTOS =====
     @staticmethod
     def produto_inserir(descricao, preco, estoque, categoria_id):
+
+        for prod in View.produto_listar():
+            if descricao == prod.getDescricao():
+                raise ValueError("Produto já existe")
+
         produto = Produto(0, descricao, preco, estoque, categoria_id)
         ProdutoDAO.inserir(produto)
         

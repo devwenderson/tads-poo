@@ -1,4 +1,5 @@
 from datetime import datetime
+import re
 
 class Cliente:
     def __init__(self, id: int, nome: str, email: str, senha: str, telef: str):
@@ -24,9 +25,16 @@ class Cliente:
         self.nome = nome
 
     def setEmail(self, email):
+        if (("@" not in email) and ("admin" not in email) ):
+            raise ValueError("Email inválido")
         self.email = email
 
     def setTelefone(self, telefone):
+
+        pattern = r'^\(\d{2}\)\s9\d{4}-\d{4}$'
+        if not(re.match(pattern, telefone)):
+            raise ValueError("Telefone inválido")
+        
         self.telefone = telefone
     
     def setSenha(self, senha):
@@ -110,9 +118,13 @@ class Produto:
         self.descricao = descricao
 
     def setPreco(self, preco):
+        if (preco < 0):
+            raise ValueError("Preço não pode ser negativo")
         self.preco = preco
 
     def setEstoque(self, estoque):
+        if (estoque < 0):
+            raise ValueError("Estoque não pode ser negativo")
         self.estoque = estoque
 
     def setCategoria(self, categoria_id):

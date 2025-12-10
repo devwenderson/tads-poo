@@ -1,44 +1,30 @@
 [
     {
-        "id": 3,
-        "nome": "Wenderson \u00c1lvares Cabral",
-        "email": "wend.cabral@gmail.com",
+        "id": 1,
+        "nome": "Fabiano",
+        "email": "fabiano@gmail.com",
         "senha": "1234",
-        "telefone": ""
-    },
-    {
-        "id": 5,
-        "nome": "Wenderson \u00c1lvares Cabral",
-        "email": "wend.cabral@gmail.com",
-        "senha": "1234",
-        "telefone": "1234"
-    },
-    {
-        "id": 6,
-        "nome": "Wenderson \u00c1lvares Cabral",
-        "email": "wend@gmail.com",
-        "senha": "1234",
-        "telefone": "1234"
-    },
-    {
-        "id": 4,
-        "nome": "Pedrinho",
-        "email": "pedrinho@gmail.com",
-        "senha": "12345",
-        "telefone": "1234"
+        "telefone": "(84) 91234-5678"
     },
     {
         "id": 2,
         "nome": "admin",
         "email": "admin",
         "senha": "admin",
-        "telefone": "admin"
+        "telefone": "(84) 91111-1111"
     },
     {
-        "id": 7,
-        "nome": "Sandro",
-        "email": "sandro",
+        "id": 3,
+        "nome": "Wenderson",
+        "email": "wenderson@gmail.com",
         "senha": "1234",
-        "telefone": "a"
+        "telefone": "(84) 91111-1112"
+    },
+    {
+        "id": 4,
+        "nome": "Amanda",
+        "email": "amanda@gmail.com",
+        "senha": "1234",
+        "telefone": "(84) 98888-8888"
     }
 ]
