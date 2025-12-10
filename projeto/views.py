@@ -25,6 +25,11 @@ class View:
     # ===== CLIENTES =====
     @staticmethod
     def cliente_inserir(nome, email, senha, telefone):
+        
+        for cli in View.cliente_listar():
+            if email == cli.getEmail():
+                raise ValueError("Cliente já cadastrado")
+            
         cliente = Cliente(0, nome, email, senha, telefone)
         ClienteDAO.inserir(cliente)
     
@@ -113,9 +118,7 @@ class View:
         for p in produtos:
             valor_reajustado = p.getPreco() * (1 + (percentual/100))
             View.produto_atualizar(p.getId(), p.getDescricao(), valor_reajustado, p.getEstoque(), p.getCategoria())
-    
-    
-    
+        
     # ==== VENDAS =====
     def vendas_listar(is_carrinho=False, carrinho_only=False, cliente_id=None):
         vendas = VendaDAO.listar(is_carrinho=is_carrinho, carrinho_only=carrinho_only, cliente_id=cliente_id)
@@ -132,6 +135,14 @@ class View:
         venda = Venda(0, data, carrinho, cliente_id)
         venda.setProdutos(produto_id)
         VendaDAO.inserir(venda)
+
+    def verifica_estoque(produto_id):
+        produtos = View.produto_listar()
+        for prod in produtos:
+            if (prod.getId() == produto_id):
+                if (prod.getEstoque() == 0):
+                    return False
+        return True
     
     def carrinho_inserir(data, carrinho, cliente_id, produto_id, qtd):
         carrinhos = VendaDAO.listar(is_carrinho=True, cliente_id=cliente_id)
@@ -142,6 +153,9 @@ class View:
                 
                 itens = VendaItemDAO.listar(car)
                 for it in itens:
+                    if (not(View.verifica_estoque(produto_id))):
+                        raise ValueError("Sem estoque do produto")
+                    
                     if (produto_id == it.getProduto()):
                         it.setQtd(it.getQtd() + qtd) 
                         VendaItemDAO.atualizar(it)
@@ -198,7 +212,7 @@ class View:
                 if i.getProduto() == p.getId():
                     estoque_atual = p.getEstoque()
                     qtd_comprada = i.getQtd()
-                    p.setEstoque(estoque_atual-qtd_comprada)
+                    p.setEstoque(estoque_atual - qtd_comprada)
                     ProdutoDAO.atualizar(p)
         
         if comprar:

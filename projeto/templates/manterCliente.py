@@ -35,16 +35,17 @@ class ManterClienteUI:
         telefone = st.text_input("Telefone")
 
         if st.button("Cadastrar"):
-            for c in View.cliente_listar():
-                if c.getEmail() == email:
-                    st.warning("Cliente já existe")
-                    time.sleep(2)
-                    st.rerun()
+            try:
+                View.cliente_inserir(nome, email, senha, telefone)
+                st.success("Cliente cadastrado com sucesso")
+                time.sleep(2)
+                st.rerun()
+            except ValueError as e:
+                st.warning(f"{e}")
+                time.sleep(2)
+                st.rerun()
             
-            View.cliente_inserir(nome, email, senha, telefone)
-            st.success("Cliente cadastrado com sucesso")
-            time.sleep(2)
-            st.rerun()
+            
 
     def atualizar():
         clientes = View.cliente_listar()
