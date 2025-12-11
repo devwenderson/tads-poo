@@ -102,11 +102,7 @@ class Produto:
     
     def __str__(self):
         texto = ""
-        texto += f"ID: {self.id:03d}\n"
-        texto += f"Descrição: {self.descricao}\n"
-        texto += f"Preço: R$ {self.preco:0.2f}\n"
-        texto += f"Estoque: {self.estoque}\n"
-        texto += f"Categoria: {self.categoria_id}\n"
+        texto += f"ID: {self.id:03d} - {self.descricao}"
         return texto
 
 
@@ -185,12 +181,18 @@ class Venda:
         self.id = id
 
     def setData(self, data):
+        if (data > datetime.now()):
+            raise ValueError("Data inválida")
         self.data = data
 
     def setCarrinho(self, carrinho):
+        if not(isinstance(carrinho, bool)):
+            raise ValueError("O carrinho deve ser um booleano")
         self.carrinho = carrinho
 
     def setCliente(self, cliente):
+        if isinstance(cliente, str):
+            raise ValueError("O ID não pode ser uma string")
         self.cliente = cliente
 
     # --------- GETTERS ---------
@@ -245,18 +247,28 @@ class VendaItem:
 
     # --------- SETTERS ---------
     def setId(self, id):
+        if isinstance(id, str):
+            raise ValueError("O ID não pode ser uma string")
         self.id = id
 
     def setQtd(self, qtd):
+        if qtd < 0:
+            raise ValueError("A quantidade não pode ser negativa")
         self.qtd = qtd
 
     def setPreco(self, preco):
+        if preco < 0:
+            raise ValueError("Preço não pode ser negativo")
         self.preco = preco
 
     def setVenda(self, venda_id):
+        if isinstance(venda_id, str):
+            raise ValueError("O ID não pode ser uma string")
         self.venda_id = venda_id
 
     def setProduto(self, produto_id):
+        if isinstance(produto_id, str):
+            raise ValueError("O ID não pode ser uma string")
         self.produto_id = produto_id
 
     # --------- GETTERS ---------

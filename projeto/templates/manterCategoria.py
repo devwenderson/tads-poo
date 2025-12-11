@@ -14,31 +14,27 @@ class ManterCategoriaUI:
         with tab4: ManterCategoriaUI.excluir()
     
     def listar():
-        categorias = View.categoria_listar()
-
-        if (len(categorias) == 0):
-            st.write("Nenhuma categoria cadastrada")
-        else:
+        try:
+            categorias = View.categoria_listar()
             list_dict = []
             for obj in categorias:
                 list_dict.append(obj.to_json())
             df = pd.DataFrame(list_dict)
             st.dataframe(df, hide_index=True, column_order=["id", "nome"])
+        except ValueError as e:
+            st.warning(e)
     
     def cadastrar():               
         nome = st.text_input("Nome")
 
         if st.button("Cadastrar"):
-            for c in View.categoria_listar():
-                if c.getNome() == nome:
-                    st.warning("Categoria já existe")
-                    time.sleep(2)
-                    st.rerun()
-            
-            View.categoria_inserir(nome)
-            st.success("Categoria cadastrada com sucesso")
-            time.sleep(2)
-            st.rerun()
+            try:
+                View.categoria_inserir(nome)
+                st.success("Categoria cadastrada com sucesso")
+                time.sleep(2)
+                st.rerun()
+            except ValueError as e:
+                st.warning(e)
 
     def atualizar():
         categorias = View.categoria_listar()
@@ -48,29 +44,27 @@ class ManterCategoriaUI:
         nome = st.text_input("Novo nome", op.getNome())
 
         if st.button("Atualizar"):
-            id = op.getId()
-            View.categoria_atualizar(id, nome)
-            st.success("Categoria atualizada com sucesso")
-            time.sleep(2)
-            st.rerun()
+            try:
+                id = op.getId()
+                View.categoria_atualizar(id, nome)
+                st.success("Categoria atualizada com sucesso")
+                time.sleep(2)
+                st.rerun()
+            except ValueError as e:
+                st.warning(e)
                 
 
     def excluir():
         categorias = View.categoria_listar()
-        produtos = View.produto_listar()
-
         op = st.selectbox("Excluir categoria", categorias)
 
         if st.button("Excluir"):
             cat_id = op.getId()
 
-            for pro in produtos:
-                if cat_id == pro.getCategoria():
-                    st.error("Essa categoria está sendo usada")
-                    time.sleep(2)
-                    st.rerun()
-            
-            View.categoria_excluir(cat_id)
-            st.success("Categoria excluída com sucesso")
-            time.sleep(2)
-            st.rerun()
+            try:
+                View.categoria_excluir(cat_id)
+                st.success("Categoria excluída com sucesso")
+                time.sleep(2)
+                st.rerun()
+            except ValueError as e:
+                st.warning(e)

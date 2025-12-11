@@ -2,29 +2,29 @@
     {
         "id": 2,
         "descricao": "Mouse simples de escrit\u00f3rio gamer",
-        "preco": 78.0,
+        "preco": 0.0,
         "estoque": 59,
+        "categoria": 1
+    },
+    {
+        "id": 4,
+        "descricao": "Monitor ProMax COD 180Hz",
+        "preco": 0.0,
+        "estoque": 90,
         "categoria": 1
     },
     {
         "id": 3,
         "descricao": "Monitor",
-        "preco": 507.0,
+        "preco": 200.0,
         "estoque": 490,
-        "categoria": 2
+        "categoria": 1
     },
     {
         "id": 1,
         "descricao": "Teclado",
-        "preco": 160.0,
+        "preco": 0.0,
         "estoque": 144,
-        "categoria": 2
-    },
-    {
-        "id": 4,
-        "descricao": "Monitor ProMax COD 180Hz",
-        "preco": 1.0,
-        "estoque": 90,
         "categoria": 1
     }
 ]

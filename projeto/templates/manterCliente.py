@@ -15,16 +15,15 @@ class ManterClienteUI:
     
     def listar():
         st.subheader("Clientes")
-        clientes = View.cliente_listar()
-
-        if (len(clientes) == 0):
-            st.write("Nenhum cliente cadastrado")
-        else:
+        try:
+            clientes = View.cliente_listar()
             list_dict = []
             for obj in clientes:
                 list_dict.append(obj.to_json())
             df = pd.DataFrame(list_dict)
             st.dataframe(df, hide_index=True, column_order=["id", "nome", "email", "telefone"])
+        except ValueError as e:
+            st.warning(e)
     
     def cadastrar():
         st.subheader("Cadastrar")   
@@ -56,11 +55,14 @@ class ManterClienteUI:
         telefone = st.text_input("Novo telefone", op.getTelefone())
 
         if st.button("Atualizar"):
-            cli_id = op.getId()
-            View.cliente_atualizar(cli_id, nome, email, telefone, senha)
-            st.success("Cliente atualizado com sucesso")
-            time.sleep(2)
-            st.rerun()
+            try:
+                cli_id = op.getId()
+                View.cliente_atualizar(cli_id, nome, email, telefone, senha)
+                st.success("Cliente atualizado com sucesso")
+                time.sleep(2)
+                st.rerun()
+            except ValueError as e:
+                st.warning(e)
                 
 
     def excluir():

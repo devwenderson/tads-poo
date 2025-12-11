@@ -6,20 +6,18 @@ import time
 class ManterProdutoUI:
     def main():
         st.header("Manter produto")
-        tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Cadastrar", "Atualizar", "Excluir"])
+        tab1, tab2, tab3, tab4, tab5 = st.tabs(["Listar", "Cadastrar", "Atualizar", "Excluir", "Reajustar preço"])
 
         with tab1: ManterProdutoUI.listar()
         with tab2: ManterProdutoUI.cadastrar()
         with tab3: ManterProdutoUI.atualizar()
         with tab4: ManterProdutoUI.excluir()
+        with tab5: ManterProdutoUI.reajustar_preco()
     
     def listar():
         st.subheader("Produtos")
-        produtos = View.produto_listar()
-
-        if (len(produtos) == 0):
-            st.write("Nenhum produto cadastrado")
-        else:
+        try:
+            produtos = View.produto_listar()
             categorias = View.categoria_listar()
 
             prod_list_dict = []
@@ -39,6 +37,9 @@ class ManterProdutoUI:
 
             df = pd.DataFrame(prod_list_dict)
             st.dataframe(df, hide_index=True, column_order=["id", "descricao", "preco", "estoque", "categoria"])
+        except ValueError as e:
+            st.warning(e)
+
     
     def cadastrar():       
         st.subheader("Cadastrar produto")      
@@ -73,11 +74,12 @@ class ManterProdutoUI:
         descricao = st.text_input("Nova descrição", op.getDescricao())
         preco = st.number_input("Novo preço", op.getPreco())
         estoque = st.number_input("Novo estoque", op.getEstoque())
-        categoria = st.selectbox("Nova categoria", options=categorias, index=None)
+        categoria = st.selectbox("Nova categoria", options=categorias, index=op.getCategoria()-1)
 
         if st.button("Atualizar"):
             pro_id = op.getId()
             cat_id = categoria.getId()
+
             if categoria == None:
                 cat_id = op.getCategoria()
             
@@ -89,7 +91,6 @@ class ManterProdutoUI:
             except ValueError as e:
                 st.warning(e)
                 
-
     def excluir():
         produtos = View.produto_listar()
 
@@ -101,3 +102,14 @@ class ManterProdutoUI:
             st.success("Produto excluído com sucesso")
             time.sleep(2)
             st.rerun()
+    
+    def reajustar_preco():
+        percentual = st.number_input("Percentual", value=0)
+        if st.button("Reajustar"):
+            try:
+                View.produto_reajustar(percentual=percentual)
+                st.success("Preços reajustados com sucesso")
+                time.sleep(2)
+                st.rerun()
+            except ValueError as e:
+                st.warning(e)
