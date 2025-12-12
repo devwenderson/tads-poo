@@ -36,6 +36,7 @@ class IndexUI:
             "Cadastro de clientes",
             "Cadastro de categorias",
             "Cadastro de produtos",
+            "Cadastro de vendas",
             "Reajustar produtos",
             "Sair"
         ])
@@ -43,6 +44,7 @@ class IndexUI:
         if op == "Cadastro de categorias": ManterCategoriaUI.main()
         if op == "Cadastro de clientes": ManterClienteUI.main()
         if op == "Cadastro de produtos": ManterProdutoUI.main()
+        if op == "Cadastro de vendas": ManterVendaUI.main()
         if op == "Reajustar produtos": ManterProdutoUI.main()
         if op == "Sair": IndexUI.logout()
 

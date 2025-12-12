@@ -40,29 +40,5 @@
         "data": "10/11/2025",
         "carrinho": true,
         "cliente": 136
-    },
-    {
-        "id": 7,
-        "data": "10/11/2025",
-        "carrinho": false,
-        "cliente": 3
-    },
-    {
-        "id": 9,
-        "data": "09/12/2025",
-        "carrinho": false,
-        "cliente": 3
-    },
-    {
-        "id": 10,
-        "data": "09/12/2025",
-        "carrinho": false,
-        "cliente": 7
-    },
-    {
-        "id": 11,
-        "data": "09/12/2025",
-        "carrinho": false,
-        "cliente": 7
     }
 ]
