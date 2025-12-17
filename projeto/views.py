@@ -149,9 +149,6 @@ class View:
         vendas = VendaDAO.listar(is_carrinho=is_carrinho, carrinho_only=carrinho_only, cliente_id=cliente_id)
         itens = VendaItemDAO.listar()
         produtos = ProdutoDAO.listar()
-        
-        if len(vendas) == 0:
-            raise ValueError("Não há vendas cadastradas")
 
         return {
             "vendas": vendas,

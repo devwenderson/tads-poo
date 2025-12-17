@@ -23,6 +23,7 @@ class ClienteUI:
         qtd = st.number_input("Quantidade", value=1)
         
         if (st.button("Inserir")):
+            
             if carrinho["carrinho"] != None:
                 View.carrinho_inserir(
                     data="",

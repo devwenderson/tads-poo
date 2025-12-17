@@ -92,65 +92,16 @@
     },
     {
         "id": 14,
-        "venda_id": 7,
-        "produto_id": 4,
-        "preco": 5198.7,
-        "qtd": -1
-    },
-    {
-        "id": 15,
-        "venda_id": 8,
-        "produto_id": 2,
-        "preco": 78.0,
-        "qtd": 7
-    },
-    {
-        "id": 16,
-        "venda_id": 7,
-        "produto_id": 2,
-        "preco": 78.0,
+        "venda_id": 9,
+        "produto_id": 6,
+        "preco": 110.00000000000001,
         "qtd": 10
     },
     {
-        "id": 17,
-        "venda_id": 9,
-        "produto_id": 3,
-        "preco": 507.0,
-        "qtd": 1
-    },
-    {
-        "id": 18,
-        "venda_id": 9,
-        "produto_id": 2,
-        "preco": 78.0,
-        "qtd": 1
-    },
-    {
-        "id": 19,
+        "id": 15,
         "venda_id": 10,
-        "produto_id": 1,
-        "preco": 160.0,
-        "qtd": 5
-    },
-    {
-        "id": 20,
-        "venda_id": 11,
-        "produto_id": 2,
-        "preco": 78.0,
-        "qtd": 43
-    },
-    {
-        "id": 21,
-        "venda_id": 11,
-        "produto_id": 3,
-        "preco": 507.0,
-        "qtd": 2
-    },
-    {
-        "id": 22,
-        "venda_id": 11,
-        "produto_id": 1,
-        "preco": 160.0,
+        "produto_id": 4,
+        "preco": 0.0,
         "qtd": 1
     }
 ]

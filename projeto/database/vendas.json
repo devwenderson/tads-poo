@@ -40,5 +40,17 @@
         "data": "10/11/2025",
         "carrinho": true,
         "cliente": 136
+    },
+    {
+        "id": 9,
+        "data": "12/12/2025",
+        "carrinho": false,
+        "cliente": 1
+    },
+    {
+        "id": 10,
+        "data": "17/12/2025",
+        "carrinho": true,
+        "cliente": 1
     }
 ]

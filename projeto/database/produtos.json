@@ -1,12 +1,5 @@
 [
     {
-        "id": 2,
-        "descricao": "Mouse simples de escrit\u00f3rio gamer",
-        "preco": 0.0,
-        "estoque": 59,
-        "categoria": 1
-    },
-    {
         "id": 4,
         "descricao": "Monitor ProMax COD 180Hz",
         "preco": 0.0,
@@ -16,7 +9,7 @@
     {
         "id": 3,
         "descricao": "Monitor",
-        "preco": 200.0,
+        "preco": 220.00000000000003,
         "estoque": 490,
         "categoria": 1
     },
@@ -26,5 +19,26 @@
         "preco": 0.0,
         "estoque": 144,
         "categoria": 1
+    },
+    {
+        "id": 5,
+        "descricao": "Mouse ergon\u00f4mico original da shopee",
+        "preco": 1082.4,
+        "estoque": 90,
+        "categoria": 1
+    },
+    {
+        "id": 2,
+        "descricao": "Mouse simples de escrit\u00f3rio gamer",
+        "preco": 0.0,
+        "estoque": 59,
+        "categoria": 1
+    },
+    {
+        "id": 6,
+        "descricao": "Coca-cola",
+        "preco": 110.00000000000001,
+        "estoque": 0,
+        "categoria": 2
     }
 ]

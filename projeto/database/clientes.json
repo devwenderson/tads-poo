@@ -26,5 +26,12 @@
         "email": "amanda@gmail.com",
         "senha": "1234",
         "telefone": "(84) 98888-8888"
+    },
+    {
+        "id": 5,
+        "nome": "Fabiano",
+        "email": "fabiano2@gmail.com",
+        "senha": "1234",
+        "telefone": "(84) 98123-3333"
     }
 ]
