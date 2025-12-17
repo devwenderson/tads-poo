@@ -33,5 +33,12 @@
         "email": "fabiano2@gmail.com",
         "senha": "1234",
         "telefone": "(84) 98123-3333"
+    },
+    {
+        "id": 6,
+        "nome": "Pedrinho",
+        "email": "pedrinho@gmail.com",
+        "senha": "1234",
+        "telefone": "(84) 91212-1212"
     }
 ]

@@ -1,8 +1,9 @@
 import json
 from models import Cliente, Categoria, Produto, Venda, VendaItem
 import os
+from abc import ABC, abstractmethod
 
-class DAO:
+class DAO(ABC):
     def __init__(self):
         self.objetos = []
 
@@ -44,10 +45,12 @@ class DAO:
         cls.salvar()
     
     @classmethod
+    @abstractmethod
     def salvar(cls):
         return None
     
     @classmethod
+    @abstractmethod
     def abrir(cls):
         return None
 
