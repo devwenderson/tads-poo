@@ -1,5 +1,5 @@
 import json
-from models import Cliente, Categoria, Produto, Venda, VendaItem
+from models import Cliente, Categoria, Produto, Venda, VendaItem, Endereco, Fornecedor, ProdutoEntrega
 import os
 from abc import ABC, abstractmethod
 
@@ -46,76 +46,66 @@ class DAO(ABC):
     
     @classmethod
     @abstractmethod
-    def salvar(cls):
-        return None
-    
+    def get_classe(cls):
+        pass
+
     @classmethod
     @abstractmethod
+    def get_arquivo(cls):
+        pass
+
+    @classmethod
+    def salvar(cls):
+        path = os.path.dirname(__file__)
+        with open(f"{path}/database/{cls.get_arquivo()}", mode="w") as arquivo:
+            json.dump(
+                cls.objetos,
+                arquivo,
+                default=cls.get_classe().to_json,
+                indent=4
+            )
+
+    @classmethod
     def abrir(cls):
-        return None
+        try:
+            cls.objetos = []
+            path = os.path.dirname(__file__)
+            with open(f"{path}/database/{cls.get_arquivo()}", mode="r") as arquivo:
+                lista = json.load(arquivo)
+                for dic in lista:
+                    obj = cls.get_classe().from_json(dic)
+                    cls.objetos.append(obj)
+            return True
+        except:
+            return False
 
 class ClienteDAO(DAO):   
     @classmethod
-    def salvar(cls):
-        path = os.path.dirname(__file__)
-        with open(f"{path}/database/clientes.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default=Cliente.to_json, indent=4)
-    
+    def get_classe(cls):
+        return Cliente
+
     @classmethod
-    def abrir(cls):
-        try:
-            cls.objetos = []
-            path = os.path.dirname(__file__)
-            with open(f"{path}/database/clientes.json", mode="r") as arquivo:
-                list_dict = json.load(arquivo)
-                for dic in list_dict:
-                    c = Cliente.from_json(dic)
-                    cls.objetos.append(c)
-            return True
-        except:
-            return False
+    def get_arquivo(cls):
+        return "clientes.json"
 
 class CategoriaDAO(DAO):  
     @classmethod
-    def salvar(cls):
-        path = os.path.dirname(__file__)
-        with open(f"{path}/database/categorias.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default=Categoria.to_json, indent=4)
-    
-    @classmethod
-    def abrir(cls):
-        try:
-            cls.objetos = []
-            path = os.path.dirname(__file__)
-            with open(f"{path}/database/categorias.json", mode="r") as arquivo:
-                list_dict = json.load(arquivo)
-                for dic in list_dict:
-                    c = Categoria.from_json(dic)
-                    cls.objetos.append(c)
-            return True
-        except:
-            return False
+    def get_classe(cls):
+        return Categoria
 
+    @classmethod
+    def get_arquivo(cls):
+        return "categorias.json"
+
+        
 class ProdutoDAO(DAO):
     @classmethod
-    def salvar(cls):
-        path = os.path.dirname(__file__)
-        with open(f"{path}/database/produtos.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default=Produto.to_json, indent=4)
-    
+    def get_classe(cls):
+        return Produto
+
     @classmethod
-    def abrir(cls):
-        try:
-            cls.objetos = []
-            path = os.path.dirname(__file__)
-            with open(f"{path}/database/produtos.json", mode="r") as arquivo:
-                list_dict = json.load(arquivo)
-                for dic in list_dict:
-                    p = Produto.from_json(dic)
-                    cls.objetos.append(p)
-            return True
-        except:
-            return False
+    def get_arquivo(cls):
+        return "produtos.json"
 
 class VendaDAO(DAO):
     @classmethod
@@ -143,24 +133,12 @@ class VendaDAO(DAO):
                 return [i for i in cls.objetos if i.getCarrinho() is not True]
     
     @classmethod
-    def salvar(cls):
-        path = os.path.dirname(__file__)
-        with open(f"{path}/database/vendas.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default=Venda.to_json, indent=4)
-    
+    def get_classe(cls):
+        return Venda
+
     @classmethod
-    def abrir(cls):
-        try:
-            cls.objetos = []
-            path = os.path.dirname(__file__)
-            with open(f"{path}/database/vendas.json", mode="r") as arquivo:
-                list_dict = json.load(arquivo)
-                for dic in list_dict:
-                    c = Venda.from_json(dic)
-                    cls.objetos.append(c)
-            return True
-        except:
-            return False
+    def get_arquivo(cls):
+        return "vendas.json"
         
 class VendaItemDAO(DAO):
     @classmethod
@@ -172,21 +150,36 @@ class VendaItemDAO(DAO):
             return cls.objetos
     
     @classmethod
-    def salvar(cls):
-        path = os.path.dirname(__file__)
-        with open(f"{path}/database/venda-itens.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default=VendaItem.to_json, indent=4)
-    
+    def get_classe(cls):
+        return VendaItem
+
     @classmethod
-    def abrir(cls):
-        try:
-            cls.objetos = []
-            path = os.path.dirname(__file__)
-            with open(f"{path}/database/venda-itens.json", mode="r") as arquivo:
-                list_dict = json.load(arquivo)
-                for dic in list_dict:
-                    c = VendaItem.from_json(dic)
-                    cls.objetos.append(c)
-            return True
-        except:
-            return False
+    def get_arquivo(cls):
+        return "venda-itens.json"
+
+class EnderecoDAO(DAO):
+    @classmethod
+    def get_classe(cls):
+        return Endereco
+
+    @classmethod
+    def get_arquivo(cls):
+        return "enderecos.json"
+    
+class FornecedorDAO(DAO):
+    @classmethod
+    def get_classe(cls):
+        return Fornecedor
+
+    @classmethod
+    def get_arquivo(cls):
+        return "fornecedores.json"
+    
+class ProdutoEntregaDAO(DAO):
+    @classmethod
+    def get_classe(cls):
+        return ProdutoEntrega
+
+    @classmethod
+    def get_arquivo(cls):
+        return "produto-entregas.json"
