@@ -4,17 +4,25 @@ from views.produtoView import ProdutoView
 from views.categoriaView import CategoriaView
 import time
 
+
 class ManterProdutoUI:
     def main():
         st.header("Manter produto")
-        tab1, tab2, tab3, tab4, tab5 = st.tabs(["Listar", "Cadastrar", "Atualizar", "Excluir", "Reajustar preço"])
+        tab1, tab2, tab3, tab4, tab5 = st.tabs(
+            ["Listar", "Cadastrar", "Atualizar", "Excluir", "Reajustar preço"]
+        )
 
-        with tab1: ManterProdutoUI.listar()
-        with tab2: ManterProdutoUI.cadastrar()
-        with tab3: ManterProdutoUI.atualizar()
-        with tab4: ManterProdutoUI.excluir()
-        with tab5: ManterProdutoUI.reajustar_preco()
-    
+        with tab1:
+            ManterProdutoUI.listar()
+        with tab2:
+            ManterProdutoUI.cadastrar()
+        with tab3:
+            ManterProdutoUI.atualizar()
+        with tab4:
+            ManterProdutoUI.excluir()
+        with tab5:
+            ManterProdutoUI.reajustar_preco()
+
     def listar():
         st.subheader("Produtos")
         try:
@@ -37,7 +45,11 @@ class ManterProdutoUI:
                         pro["categoria"] = cat["nome"]
 
             df = pd.DataFrame(prod_list_dict)
-            st.dataframe(df, hide_index=True, column_order=["id", "descricao", "preco", "estoque", "categoria"])
+            st.dataframe(
+                df,
+                hide_index=True,
+                column_order=["id", "descricao", "preco", "estoque", "categoria"],
+            )
         except ValueError as e:
             st.warning(e)
     
@@ -55,9 +67,11 @@ class ManterProdutoUI:
                     st.warning("Produto já existe")
                     time.sleep(2)
                     st.rerun()
-            
+
             try:
-                ProdutoView.produto_inserir(descricao, preco, estoque, categoria.getId())
+                ProdutoView.produto_inserir(
+                    descricao, preco, estoque, categoria.getId()
+                )
                 st.success("Produto cadastrado com sucesso")
                 time.sleep(2)
                 st.rerun()
@@ -66,7 +80,7 @@ class ManterProdutoUI:
 
     def atualizar():
         produtos = ProdutoView.produto_listar()
-        if (len(produtos) == 0): 
+        if len(produtos) == 0:
             st.write("Nenhum produto cadastrado")
 
         op = st.selectbox("Atualização do cliente", produtos)
@@ -74,7 +88,9 @@ class ManterProdutoUI:
         descricao = st.text_input("Nova descrição", op.getDescricao())
         preco = st.number_input("Novo preço", op.getPreco())
         estoque = st.number_input("Novo estoque", op.getEstoque())
-        categoria = st.selectbox("Nova categoria", options=categorias, index=op.getCategoria()-1)
+        categoria = st.selectbox(
+            "Nova categoria", options=categorias, index=op.getCategoria() - 1
+        )
 
         if st.button("Atualizar"):
             pro_id = op.getId()
@@ -82,7 +98,7 @@ class ManterProdutoUI:
 
             if categoria == None:
                 cat_id = op.getCategoria()
-            
+
             try:
                 ProdutoView.produto_atualizar(pro_id, descricao, preco, estoque, cat_id)
                 st.success("Produto atualizado com sucesso")
@@ -90,19 +106,19 @@ class ManterProdutoUI:
                 st.rerun()
             except ValueError as e:
                 st.warning(e)
-                
+
     def excluir():
         produtos = ProdutoView.produto_listar()
 
         op = st.selectbox("Excluir produtos", produtos)
         if st.button("Excluir"):
             prod_id = op.getId()
-            
+
             ProdutoView.produto_excluir(prod_id)
             st.success("Produto excluído com sucesso")
             time.sleep(2)
             st.rerun()
-    
+
     def reajustar_preco():
         percentual = st.number_input("Percentual", value=0)
         if st.button("Reajustar"):
