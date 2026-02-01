@@ -1,7 +1,12 @@
 [
-  {
-    "id": 1,
-    "cnpj": "10283123",
-    "razao_social": "sim"
-  }
+    {
+        "id": 1,
+        "cnpj": "10283123",
+        "razao_social": "sim"
+    },
+    {
+        "id": 2,
+        "cnpj": "101010101010",
+        "razao_social": "Wenderson"
+    }
 ]

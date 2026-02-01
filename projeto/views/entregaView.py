@@ -50,12 +50,6 @@ class EntregaView:
         if not isinstance(id, int):
             raise ValueError("ID inválido")
 
-        antigo = EntregaDAO.busca_obj(id)
-
-        fornecedor_id = verifica_valor(antigo.getFornecedor(), fornecedor_id, int)
-        data_pedido = verifica_valor(antigo.getDataPedido(), data_pedido, datetime)
-        data_entrega = verifica_valor(antigo.getDataEntrega(), data_entrega, datetime)
-
         if data_entrega < data_pedido:
             raise ValueError("Data de entrega não pode ser anterior à data do pedido")
 

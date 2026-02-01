@@ -10,5 +10,11 @@
         "fornecedor": 1,
         "data_pedido": "01/02/2026",
         "data_entrega": "01/02/2026"
+    },
+    {
+        "id": 3,
+        "fornecedor": 2,
+        "data_pedido": "05/02/2026",
+        "data_entrega": "05/02/2026"
     }
 ]

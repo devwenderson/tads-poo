@@ -105,6 +105,7 @@ class ManterEntregaUI:
     def atualizar():
         try:
             entregas = EntregaView.entrega_listar()
+            fornecedores = FornecedorView.fornecedor_listar()
 
             op = st.selectbox(
                 "Atualização da entrega",
@@ -114,13 +115,14 @@ class ManterEntregaUI:
             )
 
             if op:
-                fornecedor = st.text_input("Fornecedor", op.getFornecedor())
+                fornecedor = st.selectbox("Novo fornecedor", options=fornecedores, index=op.getFornecedor()-1)
                 data_pedido = st.date_input("Data do pedido", op.getDataPedido())
                 data_entrega = st.date_input("Data da entrega", op.getDataEntrega())
 
                 if st.button("Atualizar"):
+                    print(f"Data pedido: {data_pedido}")
                     EntregaView.entrega_atualizar(
-                        op.getId(), fornecedor, data_pedido, data_entrega
+                        op.getId(), fornecedor.getId(), data_pedido, data_entrega
                     )
                     st.success("Entrega atualizada")
                     time.sleep(1)
