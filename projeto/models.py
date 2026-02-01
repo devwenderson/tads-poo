@@ -497,7 +497,7 @@ class Fornecedor:
         fornecedor = Fornecedor(
             id=dic["id"],
             cnpj=dic["cnpj"],
-            ras=dic["razao_social"],
+            razao_social=dic["razao_social"],
         )
 
         return fornecedor

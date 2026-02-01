@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
+from views.fornecedorView import FornecedorView
 from views.entregaView import EntregaView
 from views.produtoView import ProdutoView
-from dao_classes import FornecedorDAO
 import time
 
 
@@ -75,27 +75,31 @@ class ManterEntregaUI:
 
     # ---------- CADASTRAR ----------
     def cadastrar():
-        try:
-            f = FornecedorDAO.listar()
-            fornecedor = st.selectbox(
-                "Fornecedor",
-                f,
-                index=None,
-                placeholder="Selecione um fornecedor",
-            )
-            data_pedido = st.date_input("Data do pedido")
-            data_entrega = st.date_input("Data da entrega")
+        
+            fornecedores = FornecedorView.fornecedor_listar()
+            if (len(fornecedores) == 0):
+                st.warning("Nenhum fornecedor cadastrado")
+            else:
+                try:
+                    fornecedor = st.selectbox(
+                        "Fornecedor",
+                        fornecedores,
+                        index=None,
+                        placeholder="Selecione um fornecedor",
+                    )
+                    data_pedido = st.date_input("Data do pedido")
+                    data_entrega = st.date_input("Data da entrega")
 
-            if st.button("Cadastrar entrega"):
-                EntregaView.entrega_inserir(
-                    fornecedor.getId(), data_pedido, data_entrega
-                )
-                st.success("Entrega cadastrada com sucesso")
-                time.sleep(1)
-                st.rerun()
+                    if st.button("Cadastrar entrega"):
+                        EntregaView.entrega_inserir(
+                            fornecedor.getId(), data_pedido, data_entrega
+                        )
+                        st.success("Entrega cadastrada com sucesso")
+                        time.sleep(1)
+                        st.rerun()
 
-        except ValueError as e:
-            st.warning(e)
+                except ValueError as e:
+                    st.warning(e)
 
     # ---------- ATUALIZAR ----------
     def atualizar():

@@ -10,5 +10,29 @@
         "produto_id": 5,
         "entrega_id": 1,
         "quantidade_produto": 4
+    },
+    {
+        "id": 3,
+        "produto_id": 1,
+        "entrega_id": 4,
+        "quantidade_produto": 7
+    },
+    {
+        "id": 4,
+        "produto_id": 2,
+        "entrega_id": 4,
+        "quantidade_produto": 7
+    },
+    {
+        "id": 5,
+        "produto_id": 2,
+        "entrega_id": 6,
+        "quantidade_produto": 1
+    },
+    {
+        "id": 6,
+        "produto_id": 1,
+        "entrega_id": 6,
+        "quantidade_produto": 1
     }
 ]

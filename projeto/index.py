@@ -42,7 +42,6 @@ class IndexUI:
             IndexUI.logout()
 
     def menu_admin():
-<<<<<<< HEAD
         op = st.sidebar.selectbox("Menu", [
             "Cadastro de clientes",
             "Cadastro de categorias",
@@ -50,6 +49,7 @@ class IndexUI:
             "Cadastro de vendas",
             "Cadastro de endereços",
             "Cadastro de fornecedores",
+            "Cadastro de entregas",
             "Reajustar produtos",
             "Sair"
         ])
@@ -60,37 +60,9 @@ class IndexUI:
         if op == "Cadastro de vendas": ManterVendaUI.main()
         if op == "Cadastro de endereços": ManterEderecoUI.main()
         if op == "Cadastro de fornecedores": ManterFornecedorUI.main()
+        if op == "Cadastro de entregas": ManterEntregaUI.main()
         if op == "Reajustar produtos": ManterProdutoUI.main()
         if op == "Sair": IndexUI.logout()
-=======
-        op = st.sidebar.selectbox(
-            "Menu",
-            [
-                "Cadastro de clientes",
-                "Cadastro de categorias",
-                "Cadastro de produtos",
-                "Cadastro de vendas",
-                "Cadastro de endereços",
-                "Cadastro de Entregas",
-                "Sair",
-            ],
-        )
-
-        if op == "Cadastro de categorias":
-            ManterCategoriaUI.main()
-        if op == "Cadastro de clientes":
-            ManterClienteUI.main()
-        if op == "Cadastro de produtos":
-            ManterProdutoUI.main()
-        if op == "Cadastro de vendas":
-            ManterVendaUI.main()
-        if op == "Cadastro de endereços":
-            ManterEderecoUI.main()
-        if op == "Cadastro de Entregas":
-            ManterEntregaUI.main()
-        if op == "Sair":
-            IndexUI.logout()
->>>>>>> beb9aea1468191e72e3c2861acb8e1898e642a0f
 
     def logout():
         del st.session_state["cliente_id"]
