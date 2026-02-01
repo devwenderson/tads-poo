@@ -48,8 +48,8 @@ class View:
     @staticmethod
     def cliente_excluir(id):
         id = int(id)
-        View.listar_cliente()
-        cliente = Cliente(id, nome="", email="", telef="")
+        View.cliente_listar()
+        cliente = Cliente(id, nome="", email="", telef="", senha="")
         ClienteDAO.excluir(cliente)
     
 

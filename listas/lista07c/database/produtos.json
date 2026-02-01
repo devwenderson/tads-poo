@@ -1,19 +1,5 @@
 [
     {
-        "id": 1,
-        "descricao": "Teclado",
-        "preco": 156.0,
-        "estoque": 143,
-        "categoria": 1
-    },
-    {
-        "id": 3,
-        "descricao": "Monitor",
-        "preco": 507.0,
-        "estoque": 493,
-        "categoria": 2
-    },
-    {
         "id": 4,
         "descricao": "Notebook",
         "preco": 5198.7,
@@ -26,5 +12,19 @@
         "preco": 78.0,
         "estoque": 103,
         "categoria": 1
+    },
+    {
+        "id": 1,
+        "descricao": "Teclado",
+        "preco": 156.0,
+        "estoque": 142,
+        "categoria": 1
+    },
+    {
+        "id": 3,
+        "descricao": "Monitor",
+        "preco": 507.0,
+        "estoque": 491,
+        "categoria": 2
     }
 ]

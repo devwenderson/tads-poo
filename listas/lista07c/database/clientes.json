@@ -26,5 +26,12 @@
         "email": "admin",
         "senha": "admin",
         "telefone": "1"
+    },
+    {
+        "id": 5,
+        "nome": "Miguel",
+        "email": "a",
+        "senha": "d",
+        "telefone": "9"
     }
 ]
