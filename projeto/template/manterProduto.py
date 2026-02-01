@@ -52,9 +52,9 @@ class ManterProdutoUI:
             )
         except ValueError as e:
             st.warning(e)
-
-    def cadastrar():
-        st.subheader("Cadastrar produto")
+    
+    def cadastrar():       
+        st.subheader("Cadastrar produto")      
         categorias = CategoriaView.categoria_listar()
         descricao = st.text_input("Nome")
         preco = st.number_input("Preco")
