@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from views import View
+from views.clienteView import ClienteView
 import time
 
 class ManterClienteUI:
@@ -16,7 +16,7 @@ class ManterClienteUI:
     def listar():
         st.subheader("Clientes")
         try:
-            clientes = View.cliente_listar()
+            clientes = ClienteView.cliente_listar()
             list_dict = []
             for obj in clientes:
                 list_dict.append(obj.to_json())
@@ -35,7 +35,7 @@ class ManterClienteUI:
 
         if st.button("Cadastrar"):
             try:
-                View.cliente_inserir(nome, email, senha, telefone)
+                ClienteView.cliente_inserir(nome, email, senha, telefone)
                 st.success("Cliente cadastrado com sucesso")
                 time.sleep(2)
                 st.rerun()
@@ -45,7 +45,7 @@ class ManterClienteUI:
             
 
     def atualizar():
-        clientes = View.cliente_listar()
+        clientes = ClienteView.cliente_listar()
         if (len(clientes) == 0): 
             st.write("Nenhum cliente cadastrado")
         op = st.selectbox("Atualização do cliente", clientes)
@@ -57,7 +57,7 @@ class ManterClienteUI:
         if st.button("Atualizar"):
             try:
                 cli_id = op.getId()
-                View.cliente_atualizar(cli_id, nome, email, telefone, senha)
+                ClienteView.cliente_atualizar(cli_id, nome, email, telefone, senha)
                 st.success("Cliente atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()
@@ -66,12 +66,12 @@ class ManterClienteUI:
                 
 
     def excluir():
-        clientes = View.cliente_listar()
+        clientes = ClienteView.cliente_listar()
         op = st.selectbox("Excluir cliente", clientes)
 
         if st.button("Excluir"):
             cli_id = op.getId()
-            View.cliente_excluir(cli_id)
+            ClienteView.cliente_excluir(cli_id)
             st.success("Cliente excluído com sucesso")
             time.sleep(2)
             st.rerun()

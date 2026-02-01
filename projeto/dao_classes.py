@@ -1,5 +1,5 @@
 import json
-from models import Cliente, Categoria, Produto, Venda, VendaItem, Endereco, Fornecedor, ProdutoEntrega
+from models import Cliente, Categoria, Produto, Venda, VendaItem, Endereco, Fornecedor, ProdutoEntrega, Entrega
 import os
 from abc import ABC, abstractmethod
 
@@ -174,6 +174,15 @@ class FornecedorDAO(DAO):
     @classmethod
     def get_arquivo(cls):
         return "fornecedores.json"
+    
+class EntregaDAO(DAO):
+    @classmethod
+    def get_classe(cls):
+        return Entrega
+
+    @classmethod
+    def get_arquivo(cls):
+        return "entregas.json"
     
 class ProdutoEntregaDAO(DAO):
     @classmethod
