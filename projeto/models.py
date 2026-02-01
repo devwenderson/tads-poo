@@ -444,6 +444,9 @@ class Endereco:
 
         return endereco
 
+    def __str__(self):
+        return f"{self.getLogradouro()}, {self.getNumero()} - {self.getCidade()}/{self.getEstado()}"
+
 
 class Fornecedor:
     def __init__(self, id: int, cnpj: str, ras: str):
@@ -460,6 +463,9 @@ class Fornecedor:
 
     def setRazaoSocial(self, ras: str):
         self.razao_social = ras
+
+    def __str__(self):
+        return f"{self.getRazaoSocial()} (CNPJ: {self.getCNPJ()})"
 
     # --- GETTERS ---
     def getId(self) -> int:
@@ -483,7 +489,7 @@ class Fornecedor:
         fornecedor = Fornecedor(
             id=dic["id"],
             cnpj=dic["cnpj"],
-            razao_social=dic["razao_social"],
+            ras=dic["razao_social"],
         )
 
         return fornecedor
@@ -495,6 +501,11 @@ class Entrega:
         self.setFornecedor(forn)
         self.setDataPedido(dt_p)
         self.setDataEntrega(dt_e)
+
+    def __str__(self):
+        data_p = self.getDataPedido().strftime("%d/%m/%Y")
+        data_e = self.getDataEntrega().strftime("%d/%m/%Y")
+        return f"Entrega #{self.getId()} | Forn: {self.getFornecedor()} | {data_p} → {data_e}"
 
     def setId(self, id: int):
         self.id = id
@@ -532,9 +543,9 @@ class Entrega:
     def from_json(dic):
         entrega = Entrega(
             id=dic["id"],
-            fornecedor=dic["fornecedor"],
-            data_pedido=datetime.strptime(dic["data_pedido"], "%d/%m/%Y"),
-            data_entrefa=datetime.strptime(dic["data_entrega"], "%d/%m/%Y"),
+            forn=dic["fornecedor"],
+            dt_p=datetime.strptime(dic["data_pedido"], "%d/%m/%Y"),
+            dt_e=datetime.strptime(dic["data_entrega"], "%d/%m/%Y"),
         )
 
         return entrega
@@ -545,7 +556,14 @@ class ProdutoEntrega:
         self.setId(id)
         self.setProdutoId(pro_id)
         self.setEntregaId(ent_id)
-        self.setQuantidaProduto(qtd_pro)
+        self.setQuantidadeProduto(qtd_pro)
+
+    def __str__(self):
+        return (
+            f"Produto {self.getProdutoId()} | "
+            f"Entrega {self.getEntregaId()} | "
+            f"Qtd: {self.getQuantidadeProduto()}"
+        )
 
     def setId(self, id: int):
         self.id = id
@@ -559,6 +577,18 @@ class ProdutoEntrega:
     def setQuantidadeProduto(self, qtd_prod):
         self.quantidade_produto = qtd_prod
 
+    def getId(self) -> int:
+        return self.id
+
+    def getProdutoId(self) -> int:
+        return self.produto_id
+
+    def getEntregaId(self) -> int:
+        return self.entrega_id
+
+    def getQuantidadeProduto(self) -> int:
+        return self.quantidade_produto
+
     # --- JSON --
     def to_json(self) -> dict:
         return {
@@ -571,9 +601,9 @@ class ProdutoEntrega:
     def from_json(dic):
         prod_ent = ProdutoEntrega(
             id=dic["id"],
-            produto_id=dic["produto_id"],
-            entrega_id=dic["entrega_id"],
-            quantidade_produto=dic["quantidade_produto"],
+            pro_id=dic["produto_id"],
+            ent_id=dic["entrega_id"],
+            qtd_pro=dic["quantidade_produto"],
         )
 
         return prod_ent
