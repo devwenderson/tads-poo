@@ -17,11 +17,15 @@ class ManterClienteUI:
         st.subheader("Clientes")
         try:
             clientes = ClienteView.cliente_listar()
-            list_dict = []
-            for obj in clientes:
-                list_dict.append(obj.to_json())
-            df = pd.DataFrame(list_dict)
-            st.dataframe(df, hide_index=True, column_order=["id", "nome", "email", "telefone"])
+            if len(clientes) == 0:
+                st.warning("Nenhum cliente cadastrado")
+            else:
+                list_dict = []
+                for obj in clientes:
+                    list_dict.append(obj.to_json())
+                df = pd.DataFrame(list_dict)
+                st.dataframe(df, hide_index=True, column_order=["id", "nome", "email", "telefone"])
+
         except ValueError as e:
             st.warning(e)
     

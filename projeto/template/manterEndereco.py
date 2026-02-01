@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from views.clienteView import ClienteView
 from views.enderecoView import EnderecoView
 import time
 from utils import sucesso_cadastro
@@ -18,17 +19,33 @@ class ManterEderecoUI:
         st.subheader("Endereços")
         try:
             enderecos = EnderecoView.endereco_listar()
-            list_dict = []
-            for obj in enderecos:
-                list_dict.append(obj.to_json())
-            df = pd.DataFrame(list_dict)
-            st.dataframe(df, hide_index=True, column_order=["id", "logradouro", "numero", "cidade", "estado"])
+            clientes = ClienteView.cliente_listar()
+
+            if (len(enderecos) == 0):
+                st.warning("Nenhum endereço cadastrado")
+            else:
+                cli_list_dict = []
+                ender_list_dict = []
+
+                for obj in enderecos:
+                    ender_list_dict.append(obj.to_json())
+
+                for obj in clientes:
+                    cli_list_dict.append(obj.to_json())
+
+                for ender in ender_list_dict:
+                    for cli in cli_list_dict:
+                        if cli["id"] == ender["id_cliente"]:
+                            ender["id_cliente"] = cli["nome"]
+
+                df = pd.DataFrame(ender_list_dict)
+                st.dataframe(df, hide_index=True, column_order=["id", "id_cliente", "logradouro", "numero", "cidade", "estado"])
         except ValueError as e:
             st.warning(e)
     
     def cadastrar():        
         st.subheader("Cadastrar")
-
+        clientes = ClienteView.cliente_listar()
         logradouro = st.text_input("Logradouro")
         num_casa =  st.text_input("Número")
         complemento = st.text_input("Complemento")
@@ -36,10 +53,11 @@ class ManterEderecoUI:
         cidade = st.text_input("Cidade")
         estado = st.text_input("Estado")
         cep = st.text_input("CEP")  
+        cli = st.selectbox("Cliente", clientes, placeholder="Selecione o cliente", index=None)
 
         if st.button("Cadastrar"):
             try:
-                EnderecoView.endereco_inserir(logradouro, num_casa, complemento, bairro, cidade, estado, cep)
+                EnderecoView.endereco_inserir(logradouro, num_casa, complemento, bairro, cidade, estado, cep, cli.getId())
                 sucesso_cadastro("Endereço")
 
             except ValueError as e:
@@ -54,8 +72,8 @@ class ManterEderecoUI:
             st.write("Nenhum endereço cadastrado")
         
         else:
+            clientes = ClienteView.cliente_listar()
             op = st.selectbox("Atualização do endereço", enderecos, index=None, placeholder="Selecione um endereço")
-
             if (op is not None):
                 logradouro = st.text_input("Novo logradouro", op.getLogradouro())
                 num_casa =  st.text_input("Novo número", op.getNumero())
@@ -64,11 +82,13 @@ class ManterEderecoUI:
                 cidade = st.text_input("Nova cidade", op.getCidade())
                 estado = st.text_input("Novo Estado", op.getEstado())
                 cep = st.text_input("Novo CEP", op.getCep())    
+                cli = st.selectbox("Novo cliente", clientes, index=op.getIdCliente()-1)
 
                 if st.button("Atualizar"):
                     try:
                         id_endereco = op.getId()
-                        EnderecoView.endereco_atualizar(id_endereco, logradouro, num_casa, complemento, bairro, cidade, estado, cep)
+                        EnderecoView.endereco_atualizar(id_endereco, logradouro, num_casa, 
+                                                        complemento, bairro, cidade, estado, cep, cli.getId())
                         sucesso_cadastro("Endereço")
 
                     except ValueError as e:

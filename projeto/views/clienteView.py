@@ -15,10 +15,7 @@ class ClienteView:
     
     @staticmethod
     def cliente_listar():
-        clientes = ClienteDAO.listar()
-        if len(clientes) == 0:
-            raise ValueError("Não há clientes cadastrados")
-        return clientes
+        return ClienteDAO.listar()
 
     @staticmethod
     def cliente_atualizar(id, nome, email, telefone, senha):

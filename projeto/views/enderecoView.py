@@ -3,7 +3,7 @@ from models import Endereco
 from utils import verifica_valor
 
 class EnderecoView:
-    def endereco_inserir(logradouro, num_casa, complemento, bairro, cidade, estado, cep):
+    def endereco_inserir(logradouro, num_casa, complemento, bairro, cidade, estado, cep, id_cliente):
         try:
             enderecos = EnderecoView.endereco_listar()
         except ValueError:
@@ -14,19 +14,19 @@ class EnderecoView:
                 raise ValueError("Endereço já existe")
 
         endereco = Endereco(0, logradouro, num_casa, complemento, 
-                    bairro, cidade, estado, cep)
+                    bairro, cidade, estado, cep, id_cliente)
         
         EnderecoDAO.inserir(endereco)
     
     def endereco_listar():
         return EnderecoDAO.listar()
     
-    def endereco_atualizar(id, logradouro, num_casa, complemento, bairro, cidade, estado, cep):
+    def endereco_atualizar(id, logradouro, num_casa, complemento, bairro, cidade, estado, cep, id_cliente):
         if not(isinstance(id, int)):
             raise ValueError("o ID precisa ser um inteiro")
         
         endereco = Endereco(id, logradouro, num_casa, complemento, 
-                    bairro, cidade, estado, cep)
+                    bairro, cidade, estado, cep, id_cliente)
         
         EnderecoDAO.atualizar(endereco)
 
@@ -35,6 +35,6 @@ class EnderecoView:
             raise ValueError("o ID precisa ser um inteiro")
         
         endereco = Endereco(id, logradouro="", numero="", complemento="", 
-                    bairro="", cidade="", estado="", cep="")
+                    bairro="", cidade="", estado="", cep="", id_cliente=0)
         EnderecoDAO.excluir(endereco)       
         

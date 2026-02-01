@@ -10,11 +10,9 @@ class Cliente:
         email: str,
         senha: str,
         telef: str,
-        id_endereco: int = 0,
         is_admin: bool = False,
     ):
         self.setId(id)
-        self.setIdEndereco(id_endereco)
         self.setNome(nome)
         self.setEmail(email)
         self.setTelefone(telef)
@@ -32,9 +30,6 @@ class Cliente:
     # --------- SETTERS ---------
     def setId(self, id):
         self.id = id
-
-    def setIdEndereco(self, id_endereco):
-        self.id_endereco = id_endereco
 
     def setNome(self, nome):
         self.nome = nome
@@ -352,6 +347,7 @@ class Endereco:
         cidade: str,
         estado: str,
         cep: str,
+        id_cliente: int
     ):
         self.setId(id)
         self.setLogradouro(logradouro)
@@ -361,6 +357,7 @@ class Endereco:
         self.setCidade(cidade)
         self.setEstado(estado)
         self.setCEP(cep)
+        self.setIdCliente(id_cliente)
 
     def __str__(self):
         return f"{self.getLogradouro()} - N° {self.getNumero()} - {self.getCidade()}/{self.getEstado()}"
@@ -368,6 +365,9 @@ class Endereco:
     # --- SETTERS ---
     def setId(self, id):
         self.id = id
+
+    def setIdCliente(self, id_cliente):
+        self.id_cliente = id_cliente
 
     def setLogradouro(self, logradouro: str):
         self.logradouro = logradouro
@@ -415,6 +415,9 @@ class Endereco:
 
     def getCep(self) -> str:
         return self.cep
+    
+    def getIdCliente(self) -> int:
+        return self.id_cliente
 
     # --- JSON ---
 
@@ -428,6 +431,7 @@ class Endereco:
             "cidade": self.cidade,
             "estado": self.estado,
             "cep": self.cep,
+            "id_cliente": self.id_cliente,
         }
 
     def from_json(dic):
@@ -440,6 +444,7 @@ class Endereco:
             cidade=dic["cidade"],
             estado=dic["estado"],
             cep=dic["cep"],
+            id_cliente=dic["id_cliente"]
         )
 
         return endereco

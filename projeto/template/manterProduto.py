@@ -40,11 +40,10 @@ class ManterProdutoUI:
             st.dataframe(df, hide_index=True, column_order=["id", "descricao", "preco", "estoque", "categoria"])
         except ValueError as e:
             st.warning(e)
-
     
     def cadastrar():       
         st.subheader("Cadastrar produto")      
-        categorias = CatgoriaView.categoria_listar()
+        categorias = CategoriaView.categoria_listar()
         descricao = st.text_input("Nome")
         preco = st.number_input("Preco")
         estoque = st.number_input("Estoque", value=0)

@@ -1,1 +1,13 @@
-[]
+[
+    {
+        "id": 1,
+        "logradouro": "Rua Alice",
+        "numero": "07",
+        "complemento": "-",
+        "bairro": "Centro",
+        "cidade": "Bom Jesus",
+        "estado": "RN",
+        "cep": "1234",
+        "id_cliente": 1
+    }
+]
