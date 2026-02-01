@@ -1,9 +1,10 @@
-from templates.manterCliente import ManterClienteUI
-from templates.manterCategoria import ManterCategoriaUI
-from templates.manterProduto import ManterProdutoUI
-from templates.manterVenda import ManterVendaUI
-from templates.login import LoginUI
-from templates.clienteUI import ClienteUI
+from template.manterCliente import ManterClienteUI
+from template.manterCategoria import ManterCategoriaUI
+from template.manterProduto import ManterProdutoUI
+from template.manterVenda import ManterVendaUI
+from template.manterEndereco import ManterEderecoUI
+from template.login import LoginUI
+from template.clienteUI import ClienteUI
 from views.loginView import LoginView
 import streamlit as st
 
@@ -37,6 +38,7 @@ class IndexUI:
             "Cadastro de categorias",
             "Cadastro de produtos",
             "Cadastro de vendas",
+            "Cadastro de endereços",
             "Reajustar produtos",
             "Sair"
         ])
@@ -45,6 +47,7 @@ class IndexUI:
         if op == "Cadastro de clientes": ManterClienteUI.main()
         if op == "Cadastro de produtos": ManterProdutoUI.main()
         if op == "Cadastro de vendas": ManterVendaUI.main()
+        if op == "Cadastro de endereços": ManterEderecoUI.main()
         if op == "Reajustar produtos": ManterProdutoUI.main()
         if op == "Sair": IndexUI.logout()
 

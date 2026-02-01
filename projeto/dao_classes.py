@@ -75,9 +75,8 @@ class DAO(ABC):
                 for dic in lista:
                     obj = cls.get_classe().from_json(dic)
                     cls.objetos.append(obj)
-            return True
-        except:
-            return False
+        except Exception as e:
+            print(f"ERRO AO ABRIR: {e}")
 
 class ClienteDAO(DAO):   
     @classmethod

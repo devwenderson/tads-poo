@@ -10,9 +10,11 @@ class Cliente:
         email: str,
         senha: str,
         telef: str,
+        id_endereco: int = 0,
         is_admin: bool = False,
     ):
         self.setId(id)
+        self.setIdEndereco(id_endereco)
         self.setNome(nome)
         self.setEmail(email)
         self.setTelefone(telef)
@@ -30,6 +32,9 @@ class Cliente:
     # --------- SETTERS ---------
     def setId(self, id):
         self.id = id
+
+    def setIdEndereco(self, id_endereco):
+        self.id_endereco = id_endereco
 
     def setNome(self, nome):
         self.nome = nome
@@ -340,34 +345,32 @@ class Endereco:
     def __init__(
         self,
         id: int,
-        cli: int,
-        log: str,
-        num: str,
-        com: str,
-        bai: str,
-        cid: str,
-        est: str,
+        logradouro: str,
+        numero: str,
+        complemento: str,
+        bairro: str,
+        cidade: str,
+        estado: str,
         cep: str,
     ):
         self.setId(id)
-        self.setCliente(cli)
-        self.setLogradouro(log)
-        self.setNumero(num)
-        self.setComplemento(com)
-        self.setBairro(bai)
-        self.setCidade(cid)
-        self.setEstado(est)
+        self.setLogradouro(logradouro)
+        self.setNumero(numero)
+        self.setComplemento(complemento)
+        self.setBairro(bairro)
+        self.setCidade(cidade)
+        self.setEstado(estado)
         self.setCEP(cep)
+
+    def __str__(self):
+        return f"{self.getLogradouro()} - N° {self.getNumero()} - {self.getCidade()}/{self.getEstado()}"
 
     # --- SETTERS ---
     def setId(self, id):
         self.id = id
 
-    def setCliente(self, cli: int):
-        self.cliente = cli
-
-    def setLogradouro(self, log: str):
-        self.logradouro = log
+    def setLogradouro(self, logradouro: str):
+        self.logradouro = logradouro
 
     def setNumero(self, num: int):
         self.numero = num
@@ -392,13 +395,10 @@ class Endereco:
     def getId(self) -> int:
         return self.id
 
-    def getCliente(self) -> int:
-        return self.cliente
-
     def getLogradouro(self) -> str:
         return self.logradouro
 
-    def getNumero(self) -> int:
+    def getNumero(self) -> str:
         return self.numero
 
     def getComplemento(self) -> str:
@@ -413,7 +413,7 @@ class Endereco:
     def getEstado(self) -> str:
         return self.estado
 
-    def getCEP(self) -> str:
+    def getCep(self) -> str:
         return self.cep
 
     # --- JSON ---
@@ -421,7 +421,6 @@ class Endereco:
     def to_json(self) -> dict:
         return {
             "id": self.id,
-            "cliente": self.cliente,
             "logradouro": self.logradouro,
             "numero": self.numero,
             "complemento": self.complemento,
@@ -434,7 +433,6 @@ class Endereco:
     def from_json(dic):
         endereco = Endereco(
             id=dic["id"],
-            cliente=dic["cliente"],
             logradouro=dic["logradouro"],
             numero=dic["numero"],
             complemento=dic["complemento"],

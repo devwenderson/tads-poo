@@ -42,8 +42,6 @@ class ManterClienteUI:
             except ValueError as e:
                 st.warning(e)
             
-            
-
     def atualizar():
         clientes = ClienteView.cliente_listar()
         if (len(clientes) == 0): 
