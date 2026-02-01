@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from views import View
+from views.categoriaView import CategoriaView
 import time
 
 class ManterCategoriaUI:
@@ -15,7 +15,7 @@ class ManterCategoriaUI:
     
     def listar():
         try:
-            categorias = View.categoria_listar()
+            categorias = CategoriaView.categoria_listar()
             list_dict = []
             for obj in categorias:
                 list_dict.append(obj.to_json())
@@ -29,7 +29,7 @@ class ManterCategoriaUI:
 
         if st.button("Cadastrar"):
             try:
-                View.categoria_inserir(nome)
+                CategoriaView.categoria_inserir(nome)
                 st.success("Categoria cadastrada com sucesso")
                 time.sleep(2)
                 st.rerun()
@@ -37,7 +37,7 @@ class ManterCategoriaUI:
                 st.warning(e)
 
     def atualizar():
-        categorias = View.categoria_listar()
+        categorias = CategoriaView.categoria_listar()
         if (len(categorias) == 0): 
             st.write("Nenhum cliente cadastrado")
         op = st.selectbox("Atualização da categoria", categorias)
@@ -46,7 +46,7 @@ class ManterCategoriaUI:
         if st.button("Atualizar"):
             try:
                 id = op.getId()
-                View.categoria_atualizar(id, nome)
+                CategoriaView.categoria_atualizar(id, nome)
                 st.success("Categoria atualizada com sucesso")
                 time.sleep(2)
                 st.rerun()
@@ -55,14 +55,14 @@ class ManterCategoriaUI:
                 
 
     def excluir():
-        categorias = View.categoria_listar()
+        categorias = CategoriaView.categoria_listar()
         op = st.selectbox("Excluir categoria", categorias)
 
         if st.button("Excluir"):
             cat_id = op.getId()
 
             try:
-                View.categoria_excluir(cat_id)
+                CategoriaView.categoria_excluir(cat_id)
                 st.success("Categoria excluída com sucesso")
                 time.sleep(2)
                 st.rerun()

@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-from views import View
+from views.produtoView import ProdutoView
+from views.categoriaView import CategoriaView
 import time
 
 class ManterProdutoUI:
@@ -17,8 +18,8 @@ class ManterProdutoUI:
     def listar():
         st.subheader("Produtos")
         try:
-            produtos = View.produto_listar()
-            categorias = View.categoria_listar()
+            produtos = ProdutoView.produto_listar()
+            categorias = CategoriaView.categoria_listar()
 
             prod_list_dict = []
             cat_list_dict = []
@@ -43,21 +44,21 @@ class ManterProdutoUI:
     
     def cadastrar():       
         st.subheader("Cadastrar produto")      
-        categorias = View.categoria_listar()
+        categorias = CatgoriaView.categoria_listar()
         descricao = st.text_input("Nome")
         preco = st.number_input("Preco")
         estoque = st.number_input("Estoque", value=0)
         categoria = st.selectbox("Categoria", categorias)
 
         if st.button("Cadastrar"):
-            for c in View.produto_listar():
+            for c in ProdutoView.produto_listar():
                 if c.getDescricao() == descricao:
                     st.warning("Produto já existe")
                     time.sleep(2)
                     st.rerun()
             
             try:
-                View.produto_inserir(descricao, preco, estoque, categoria.getId())
+                ProdutoView.produto_inserir(descricao, preco, estoque, categoria.getId())
                 st.success("Produto cadastrado com sucesso")
                 time.sleep(2)
                 st.rerun()
@@ -65,12 +66,12 @@ class ManterProdutoUI:
                 st.warning(e)
 
     def atualizar():
-        produtos = View.produto_listar()
+        produtos = ProdutoView.produto_listar()
         if (len(produtos) == 0): 
             st.write("Nenhum produto cadastrado")
 
         op = st.selectbox("Atualização do cliente", produtos)
-        categorias = View.categoria_listar()
+        categorias = CategoriaView.categoria_listar()
         descricao = st.text_input("Nova descrição", op.getDescricao())
         preco = st.number_input("Novo preço", op.getPreco())
         estoque = st.number_input("Novo estoque", op.getEstoque())
@@ -84,7 +85,7 @@ class ManterProdutoUI:
                 cat_id = op.getCategoria()
             
             try:
-                View.produto_atualizar(pro_id, descricao, preco, estoque, cat_id)
+                ProdutoView.produto_atualizar(pro_id, descricao, preco, estoque, cat_id)
                 st.success("Produto atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()
@@ -92,13 +93,13 @@ class ManterProdutoUI:
                 st.warning(e)
                 
     def excluir():
-        produtos = View.produto_listar()
+        produtos = ProdutoView.produto_listar()
 
         op = st.selectbox("Excluir produtos", produtos)
         if st.button("Excluir"):
             prod_id = op.getId()
             
-            View.produto_excluir(prod_id)
+            ProdutoView.produto_excluir(prod_id)
             st.success("Produto excluído com sucesso")
             time.sleep(2)
             st.rerun()
@@ -107,7 +108,7 @@ class ManterProdutoUI:
         percentual = st.number_input("Percentual", value=0)
         if st.button("Reajustar"):
             try:
-                View.produto_reajustar(percentual=percentual)
+                ProdutoView.produto_reajustar(percentual=percentual)
                 st.success("Preços reajustados com sucesso")
                 time.sleep(2)
                 st.rerun()

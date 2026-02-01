@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from views import View
+from views.vendaView import VendaView
 from datetime import datetime
 import time
 
@@ -10,7 +10,7 @@ class ManterVendaUI:
         ManterVendaUI.listar()
 
     def listar():
-        dados = View.vendas_listar(
+        dados = VendaView.vendas_listar(
             is_carrinho=False, 
         )
 

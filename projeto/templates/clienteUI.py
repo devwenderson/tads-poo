@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-from views import View
+from views.produtoView import ProdutoView
+from views.vendaView import VendaView
 from datetime import datetime
 import time
 
@@ -14,18 +15,18 @@ class ClienteUI:
     
     def inserir_produto_carrinho():
         st.subheader("Inserir produto no carrinho")      
-        carrinho = View.carrinho_visualizar(
+        carrinho = VendaView.carrinho_visualizar(
             cliente_id=st.session_state["cliente_id"]
         )
     
-        produtos = View.produto_listar()
+        produtos = ProdutoView.produto_listar()
         produto = st.selectbox("Produto", produtos)
         qtd = st.number_input("Quantidade", value=1)
         
         if (st.button("Inserir")):
             
             if carrinho["carrinho"] != None:
-                View.carrinho_inserir(
+                VendaView.carrinho_inserir(
                     data="",
                     carrinho=True,
                     cliente_id=st.session_state["cliente_id"],
@@ -41,7 +42,7 @@ class ClienteUI:
                 data = datetime.now()
                 carrinho = True
                 
-                View.carrinho_inserir(
+                VendaView.carrinho_inserir(
                     data=data,
                     carrinho=carrinho,
                     cliente_id=st.session_state["cliente_id"],
@@ -54,7 +55,7 @@ class ClienteUI:
         
     def visualizar_carrinho():
         st.subheader("Seu carrinho")
-        dados = View.carrinho_visualizar(
+        dados = VendaView.carrinho_visualizar(
             cliente_id=st.session_state["cliente_id"]
         )
         
@@ -85,7 +86,7 @@ class ClienteUI:
 
             if (st.button("Finalizar compra")):
                 
-                dados = View.carrinho_comprar(
+                dados = VendaView.carrinho_comprar(
                     cliente_id=st.session_state["cliente_id"],
                     comprar=True    
                 )              
@@ -95,7 +96,7 @@ class ClienteUI:
 
 
             if (st.button("Esvaziar carrinho")):
-                View.carrinho_esvaziar(st.session_state["cliente_id"])
+                VendaView.carrinho_esvaziar(st.session_state["cliente_id"])
                 st.success("Esvaziando...")
                 time.sleep(2)
                 st.rerun()
@@ -105,7 +106,7 @@ class ClienteUI:
                 
     def listar_minhas_compras():
         st.subheader("Minhas compras")
-        dados = View.vendas_listar(
+        dados = VendaView.vendas_listar(
             is_carrinho=False, 
             cliente_id=st.session_state["cliente_id"]
         )

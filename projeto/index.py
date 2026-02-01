@@ -4,7 +4,7 @@ from templates.manterProduto import ManterProdutoUI
 from templates.manterVenda import ManterVendaUI
 from templates.login import LoginUI
 from templates.clienteUI import ClienteUI
-from views import View
+from views.loginView import LoginView
 import streamlit as st
 
 class IndexUI:
@@ -65,7 +65,7 @@ class IndexUI:
                 IndexUI.menu_cliente()
     
     def main():
-        View.criar_admin()
+        LoginView.criar_admin()
         IndexUI.sidebar()
     
 IndexUI.main()
