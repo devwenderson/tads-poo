@@ -3,6 +3,7 @@ from template.manterCategoria import ManterCategoriaUI
 from template.manterProduto import ManterProdutoUI
 from template.manterVenda import ManterVendaUI
 from template.manterEndereco import ManterEderecoUI
+from template.manterFornecedor import ManterFornecedorUI
 from template.login import LoginUI
 from template.clienteUI import ClienteUI
 from views.loginView import LoginView
@@ -39,6 +40,7 @@ class IndexUI:
             "Cadastro de produtos",
             "Cadastro de vendas",
             "Cadastro de endereços",
+            "Cadastro de fornecedores",
             "Reajustar produtos",
             "Sair"
         ])
@@ -48,6 +50,7 @@ class IndexUI:
         if op == "Cadastro de produtos": ManterProdutoUI.main()
         if op == "Cadastro de vendas": ManterVendaUI.main()
         if op == "Cadastro de endereços": ManterEderecoUI.main()
+        if op == "Cadastro de fornecedores": ManterFornecedorUI.main()
         if op == "Reajustar produtos": ManterProdutoUI.main()
         if op == "Sair": IndexUI.logout()
 

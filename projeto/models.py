@@ -451,10 +451,13 @@ class Endereco:
 
 
 class Fornecedor:
-    def __init__(self, id: int, cnpj: str, ras: str):
+    def __init__(self, id: int, cnpj: str, razao_social: str):
         self.setId(id)
         self.setCNPJ(cnpj)
-        self.setRazaoSocial(ras)
+        self.setRazaoSocial(razao_social)
+
+    def __str__(self):
+        return f"{self.getCNPJ()} - {self.getRazaoSocial()}"
 
     # --- SETTERS ---
     def setId(self, id: int):
@@ -463,8 +466,8 @@ class Fornecedor:
     def setCNPJ(self, cnpj: str):
         self.cnpj = cnpj
 
-    def setRazaoSocial(self, ras: str):
-        self.razao_social = ras
+    def setRazaoSocial(self, razao_social: str):
+        self.razao_social = razao_social
 
     # --- GETTERS ---
     def getId(self) -> int:

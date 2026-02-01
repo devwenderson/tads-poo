@@ -7,7 +7,7 @@ def verifica_valor(antigo, novo, conversor=str):
     else: return conversor(novo)
 
 
-def sucesso_cadastro(obj_type):
+def sucesso_mensagem(obj_type):
     st.success(f"{obj_type} Sucesso!")
     time.sleep(2)
     st.rerun()

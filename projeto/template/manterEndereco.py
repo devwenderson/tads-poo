@@ -3,7 +3,7 @@ import pandas as pd
 from views.clienteView import ClienteView
 from views.enderecoView import EnderecoView
 import time
-from utils import sucesso_cadastro
+from utils import sucesso_mensagem
 
 class ManterEderecoUI:
     def main():
@@ -58,7 +58,7 @@ class ManterEderecoUI:
         if st.button("Cadastrar"):
             try:
                 EnderecoView.endereco_inserir(logradouro, num_casa, complemento, bairro, cidade, estado, cep, cli.getId())
-                sucesso_cadastro("Endereço")
+                sucesso_mensagem("Endereço")
 
             except ValueError as e:
                 st.warning(e)
@@ -89,7 +89,7 @@ class ManterEderecoUI:
                         id_endereco = op.getId()
                         EnderecoView.endereco_atualizar(id_endereco, logradouro, num_casa, 
                                                         complemento, bairro, cidade, estado, cep, cli.getId())
-                        sucesso_cadastro("Endereço")
+                        sucesso_mensagem("Endereço")
 
                     except ValueError as e:
                         st.warning(e)
@@ -103,6 +103,6 @@ class ManterEderecoUI:
         if st.button("Excluir"):
             try:
                 EnderecoView.endereco_excluir(op.getId())
-                sucesso_cadastro("Endereço")
+                sucesso_mensagem("Endereço")
             except ValueError as e:
                 st.warning(e)
