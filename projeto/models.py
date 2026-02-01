@@ -437,12 +437,12 @@ class Endereco:
     def from_json(dic):
         endereco = Endereco(
             id=dic["id"],
-            logradouro=dic["logradouro"],
-            numero=dic["numero"],
-            complemento=dic["complemento"],
-            bairro=dic["bairro"],
-            cidade=dic["cidade"],
-            estado=dic["estado"],
+            log=dic["logradouro"],
+            num=dic["numero"],
+            com=dic["complemento"],
+            bai=dic["bairro"],
+            cid=dic["cidade"],
+            est=dic["estado"],
             cep=dic["cep"],
             id_cliente=dic["id_cliente"]
         )
